@@ -8,7 +8,7 @@ import BrandStory from "@/components/sections/BrandStory";
 import StoneOfMonth from "@/components/sections/StoneOfMonth";
 import TrustSection from "@/components/sections/TrustSection";
 import CrystalGuideTeaser from "@/components/sections/CrystalGuideTeaser";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import ReviewInvitation from "@/components/sections/ReviewInvitation";
 import InstagramFeed from "@/components/sections/InstagramFeed";
 import WhatsAppCTA from "@/components/sections/WhatsAppCTA";
 
@@ -30,7 +30,7 @@ export default function HomePage() {
       <StoneOfMonth />
       <TrustSection />
       <CrystalGuideTeaser />
-      <TestimonialsSection />
+      <ReviewInvitation />
       <InstagramFeed />
       <WhatsAppCTA />
     </>

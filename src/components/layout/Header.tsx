@@ -166,17 +166,6 @@ export default function Header() {
                 Order via WhatsApp
               </a>
 
-              {/* WhatsApp icon — mobile */}
-              <a
-                href={getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="lg:hidden flex items-center justify-center w-8 h-8 rounded-full bg-whatsapp text-white shadow-whatsapp flex-shrink-0"
-                aria-label="Order via WhatsApp"
-              >
-                <WhatsAppIcon className="w-4 h-4" />
-              </a>
-
               {/* Hamburger — mobile */}
               <button
                 className={cn(
@@ -225,19 +214,6 @@ export default function Header() {
                 </Link>
               ))}
 
-              {/* Subtle separator + hint for the full menu */}
-              <div
-                className={cn(
-                  "ml-auto flex-shrink-0 flex items-center gap-1 text-[10px] font-sans tracking-[0.08em]",
-                  isScrolled ? "text-brown/35" : "text-ivory/40"
-                )}
-                aria-hidden="true"
-              >
-                <span>More</span>
-                <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
             </div>
           </div>
         </div>
