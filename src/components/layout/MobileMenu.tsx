@@ -24,7 +24,11 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
 
   function switchLocale() {
     const next = locale === "en" ? "tr" : "en";
-    router.replace(pathname, { locale: next });
+    // Strip any existing locale prefix that usePathname may include (e.g. "/tr" → "/")
+    // so router.replace doesn't double-prefix: /tr + locale:tr → /tr/tr
+    const cleanPath =
+      pathname.replace(/^\/(en|tr)(\/|$)/, "/").replace(/\/$/, "") || "/";
+    router.replace(cleanPath, { locale: next });
     onClose();
   }
 
