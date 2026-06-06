@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { navItems } from "@/data/navigation";
 import { SOCIAL, SITE_CONFIG } from "@/lib/constants";
+import { useTranslations, useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 interface MobileMenuProps {
   open: boolean;
@@ -14,7 +16,17 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ open, onClose }: MobileMenuProps) {
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+
+  function switchLocale() {
+    const next = locale === "en" ? "tr" : "en";
+    router.replace(pathname, { locale: next });
+    onClose();
+  }
 
   // Lock body scroll when open
   useEffect(() => {
@@ -156,8 +168,15 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
             onClick={onClose}
           >
             <WhatsAppIcon className="w-5 h-5" />
-            Order via WhatsApp
+            {t("orderViaWhatsApp")}
           </a>
+
+          <button
+            onClick={switchLocale}
+            className="flex items-center justify-center gap-2 w-full border border-brown/20 text-brown/60 font-sans font-medium text-sm py-2.5 rounded-full hover:border-sage hover:text-sage transition-all duration-200"
+          >
+            {t("switchLanguage")} — {locale === "en" ? "Türkçe" : "English"}
+          </button>
 
           {/* Social links */}
           <div className="flex items-center justify-center gap-4 pt-2">
