@@ -1,0 +1,342 @@
+{
+  "common": {
+    "siteName": "Aura Stor",
+    "loading": "Yükleniyor…",
+    "close": "Kapat",
+    "back": "Geri",
+    "viewAll": "Tümünü Gör",
+    "shopNow": "Hemen Al",
+    "learnMore": "Daha Fazla",
+    "anonymous": "Anonim"
+  },
+  "promoBanner": {
+    "text": "Suudi Arabistan, BAE ve Katar'a Kargo",
+    "highlight": "50 Dolar Üzeri Siparişlerde Ücretsiz Kargo"
+  },
+  "nav": {
+    "shop": "Mağaza",
+    "collections": "Koleksiyonlar",
+    "crystalGuide": "Kristal Rehberi",
+    "giftSets": "Hediye Setleri",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "orderViaWhatsApp": "WhatsApp'tan Sipariş Ver",
+    "switchLanguage": "EN"
+  },
+  "hero": {
+    "eyebrow": "Lüks Kristal Takı",
+    "tagline": "Enerjini Taşı.",
+    "promise": "Topraktan Doğdu. Niyetle Giyildi.",
+    "shipping": "Suudi Arabistan, BAE ve Katar'a Teslimat",
+    "ctaShop": "Koleksiyonu Keşfet",
+    "ctaWhatsApp": "WhatsApp'tan Sipariş Ver",
+    "scroll": "Aşağı Kaydır",
+    "badge1Label": "Doğal Taşlar",
+    "badge1Sub": "100% Gerçek",
+    "badge2Label": "Ücretsiz Kargo",
+    "badge2Sub": "50 Dolar Üzeri",
+    "badge3Label": "WhatsApp Sipariş",
+    "badge3Sub": "Kişisel Hizmet",
+    "waMessage": "Merhaba! Aura Stor'u keşfettim ve kristal takı koleksiyonunuzu incelemek istiyorum."
+  },
+  "whyAuraStor": {
+    "label": "Taahhüdümüz",
+    "title": "Neden Aura Stor?",
+    "subtitle": "Seçtiğimiz taştan kapınıza ulaşana kadar her detay özenle düşünülmüştür.",
+    "natural": {
+      "title": "Doğal Taşlar",
+      "description": "Her taş etik kaynaklıdır — sentetik, işlenmiş ya da taklit hiçbir şey kullanmıyoruz. Gerçek toprağı taşıyorsunuz."
+    },
+    "shipping": {
+      "title": "Hızlı Körfez Kargosı",
+      "description": "Suudi Arabistan, BAE ve Katar'a hızlı ve takip edilebilir teslimat. Siparişiniz özenle paketlenerek kapınıza gelir."
+    },
+    "handcrafted": {
+      "title": "El Yapımı Takılar",
+      "description": "Her parça seri üretimden uzak, el emeğiyle ve büyük bir özenle tasarlanır. Kısayol yoktur."
+    },
+    "support": {
+      "title": "WhatsApp Destek",
+      "description": "Sipariş verin, soru sorun veya teslimatınızı takip edin — hepsi WhatsApp üzerinden. Gerçek insanlar, gerçek ilgi."
+    }
+  },
+  "howItWorks": {
+    "label": "Basit Süreç",
+    "title": "Nasıl Çalışır?",
+    "subtitle": "Göz atmaktan kutunuzu açmaya kadar — kristal takınızı sipariş etmek bir mesaj göndermek kadar kolay.",
+    "step1": {
+      "number": "01",
+      "title": "Taşınızı Seçin",
+      "description": "Doğal kristal takı koleksiyonlarımıza göz atın. Her parçada taşın enerjisi, çakrası ve özellikleri yer alır.",
+      "cta": "Koleksiyonları Keşfet"
+    },
+    "step2": {
+      "number": "02",
+      "title": "Siparişinizi Verin",
+      "description": "İstediğiniz parçayı WhatsApp üzerinden bize bildirin. Stok durumunu onaylar, sorularınızı yanıtlar ve siparişinizi hazırlarız.",
+      "cta": "WhatsApp'tan Sipariş Ver"
+    },
+    "step3": {
+      "number": "03",
+      "title": "Teslim Alın ve Keyfini Çıkarın",
+      "description": "Takınız özenle paketlenerek kapınıza gönderilir. Teslimatınızı WhatsApp üzerinden takip edin ve fotoğraftaki gibi kusursuz parçanızı alın.",
+      "cta": "Mağazayı Gör"
+    }
+  },
+  "trust": {
+    "label": "Müşteri Sevgisi",
+    "title": "Müşteriler Neden Aura Stor'u Seviyor?",
+    "subtitle": "Körfez genelinde binlerce mutlu müşteri, kristal takıları için bize güveniyor.",
+    "item1": {
+      "stat": "100%",
+      "title": "Premium Doğal Taşlar",
+      "description": "Her taş otantik ve etik kaynaklıdır. Sentetik, boya veya taklit hiçbir şey kullanmıyoruz — ne görüyorsanız onu alıyorsunuz."
+    },
+    "item2": {
+      "stat": "Güvenli",
+      "title": "Güvenli Sipariş Süreci",
+      "description": "Tam şeffaflıkla WhatsApp üzerinden sipariş verin. Herhangi bir ödeme yapılmadan önce ne aldığınızı ve fiyatını tam olarak bilirsiniz."
+    },
+    "item3": {
+      "stat": "3 Ülke",
+      "title": "Hızlı Uluslararası Kargo",
+      "description": "Suudi Arabistan, BAE ve Katar'a takip edilebilir teslimat yapıyoruz. Siparişiniz özenle paketlenerek mükemmel koşullarda teslim edilir."
+    },
+    "item4": {
+      "stat": "Kişisel",
+      "title": "Kişiselleştirilmiş Müşteri Desteği",
+      "description": "Bot yok, kuyruk yok. WhatsApp'tan mesaj atın; haftanın yedi günü gerçek bir insandan gerçek bir yanıt alın."
+    },
+    "ornament": "Niyetle el yapımı"
+  },
+  "brandStory": {
+    "label": "Hikayemiz",
+    "title": "Topraktan Doğdu.",
+    "titleItalic": "Niyetle Giyildi.",
+    "body1": "Aura Stor basit bir inançla doğdu: taktığımız taşlar güzelliğin ötesinde bir şey taşır. Milyonlarca yıl boyunca yer altında oluşan her kristal, sessizce bizimkiyle etkileşime giren bir enerji — bir frekans — taşır.",
+    "body2": "Her parçayı kalitesi ve enerjisi için seçilmiş, 100% doğal taşlardan küratörlük yaparak ve el ile işleyerek hazırlıyoruz. Sentetik yok. Kısayol yok. Sadece toprak, niyetle şekillendirilmiş.",
+    "pullQuote": "\"Doğru taş doğru insanı bulur.\"",
+    "pillar1Label": "Yalnızca Doğal",
+    "pillar1": "Her taş 100% gerçektir — asla sentetik, asla işlenmiş, asla taklit değildir.",
+    "pillar2Label": "Niyetli Tasarım",
+    "pillar2": "Her parça, enerjinizi ve niyetinizi günlük hatırlatıcı olarak taşımak üzere tasarlanmıştır.",
+    "pillar3Label": "Kişisel Hizmet",
+    "pillar3": "Doğrudan WhatsApp üzerinden sipariş verin. Gerçek insanlar, gerçek sohbet, gerçek ilgi.",
+    "readMore": "Hikayemizi okuyun"
+  },
+  "categories": {
+    "label": "Keşfet",
+    "title": "Kategoriye Göre Alışveriş",
+    "subtitle": "Doğal taşlardan el yapımı. Her parça benzersizdir.",
+    "viewAll": "Tüm Ürünleri Gör",
+    "shopNow": "Hemen al"
+  },
+  "bestSellers": {
+    "label": "Müşteri Favorileri",
+    "title": "En Çok Satanlar",
+    "subtitle": "En sevilen parçalarımız — enerjisini taşıyan müşterilerimiz tarafından seçildi.",
+    "bestSeller": "En Çok Satan",
+    "newArrival": "Yeni Gelenler",
+    "viewAll": "Tüm Ürünleri Gör",
+    "orderWhatsApp": "WhatsApp'tan Sipariş Ver"
+  },
+  "stoneOfMonth": {
+    "label": "Ayın Taşı",
+    "propertiesLabel": "Kristal Özellikleri",
+    "viewGuide": "Kristal Rehberini Oku",
+    "shopStone": "{stone} Takılarını İncele",
+    "waMessage": "Merhaba! Aura Stor'da {stone} takısıyla ilgileniyorum. Bir parça seçmeme yardımcı olabilir misiniz?"
+  },
+  "crystalGuideTeaser": {
+    "label": "Bilgi",
+    "title": "Kristal Rehberi",
+    "subtitle": "Koleksiyonumuzdaki her taşın enerjisi, çakrası ve şifa özellikleri hakkında bilgi edinin.",
+    "exploreAll": "Tüm Kristalleri Keşfet",
+    "learnMore": "Daha fazla bilgi"
+  },
+  "instagramFeed": {
+    "label": "Yolculuğumuzu Takip Edin",
+    "title": "Aura Stor Instagram'da",
+    "handle": "@aura._sto",
+    "follow": "Instagram'da Takip Et"
+  },
+  "whatsappCTA": {
+    "label": "Nasıl Sipariş Verilir",
+    "title": "Doğrudan WhatsApp'tan Sipariş Verin.",
+    "titleItalic": "Kişisel. Anında.",
+    "subtitle": "Ödeme formu yok. Hesap açmak yok. Sadece ekibimizle bir sohbet — ve parçanız, güzelce paketlenmiş, yolda.",
+    "step1Number": "01",
+    "step1Title": "Göz At ve Seç",
+    "step1Desc": "Koleksiyonumuzu keşfedin ve size seslenen taşı bulun.",
+    "step2Number": "02",
+    "step2Title": "Mesaj Atın",
+    "step2Desc": "Herhangi bir WhatsApp düğmesine tıklayın ve sevdiğiniz parçayı söyleyin.",
+    "step3Number": "03",
+    "step3Title": "Onaylayıp Gönderiyoruz",
+    "step3Desc": "Stok durumunu onaylıyor ve siparişinizi güzel bir ambalajla gönderiyoruz.",
+    "cta": "WhatsApp'tan Siparişe Başla",
+    "available": "{days} Müsait",
+    "hours": "{hours}",
+    "response": "Yanıt: {time}",
+    "assurance1": "50 Dolar Üzeri Siparişlerde Ücretsiz Kargo",
+    "assurance2": "Suudi Arabistan, BAE ve Katar'a Kargo",
+    "assurance3": "Kadife Hediye Ambalajı Dahil",
+    "assurance4": "14 Günlük İade Politikası",
+    "waMessage": "Merhaba! Aura Stor'dan sipariş vermek istiyorum. Doğru parçayı bulmama yardımcı olabilir misiniz?"
+  },
+  "shop": {
+    "title": "Kristal Takı Mağazası",
+    "all": "Tümü",
+    "products": "{count} ürün",
+    "product": "{count} ürün",
+    "empty": "Bu kategoride henüz ürün bulunmuyor.",
+    "viewAll": "Tüm ürünleri gör",
+    "freeShipping": "50 Dolar Üzeri Siparişlerde Ücretsiz Kargo",
+    "bestSeller": "En Çok Satan",
+    "newArrival": "Yeni Gelenler",
+    "orderWhatsApp": "WhatsApp'tan Sipariş Ver",
+    "replyTime": "Birkaç saat içinde yanıt veriyoruz",
+    "businessHours": "Pzt – Paz, 09:00 – 22:00",
+    "breadcrumbHome": "Ana Sayfa",
+    "breadcrumbShop": "Mağaza",
+    "crystalGuideLink": "{crystal} enerjisini keşfedin",
+    "comingSoon": "Yakında",
+    "comingSoonBody": "Bu koleksiyona son rötuşları yapıyoruz. Yakında tekrar kontrol edin.",
+    "notifyWhatsApp": "WhatsApp'ta Bildir"
+  },
+  "product": {
+    "waMessage": "Merhaba! Aura Stor'dan \"{product}\" ürününü sipariş etmek istiyorum. Mevcut mu? Gösterilen fiyat: {price}"
+  },
+  "collections": {
+    "title": "Kristal Takı Koleksiyonları",
+    "subtitle": "Her koleksiyon, seçilmiş bir enerji yolculuğudur.",
+    "label": "Koleksiyonlar",
+    "enquire": "WhatsApp'tan Bilgi Al",
+    "aboutCollection": "Bu Koleksiyon Hakkında",
+    "thePieces": "Parçalar",
+    "shopCollection": "Koleksiyonu İncele",
+    "theStone": "Taş",
+    "otherCollections": "Diğer Koleksiyonlar",
+    "continueExploring": "Keşfetmeye Devam Et",
+    "viewAll": "Tüm koleksiyonları gör",
+    "viewAllProducts": "Tüm ürünleri gör",
+    "breadcrumbHome": "Ana Sayfa",
+    "breadcrumbCollections": "Koleksiyonlar",
+    "stoneCollection": "{stone} Koleksiyonu",
+    "readFullGuide": "{crystal} Rehberinin Tamamını Oku",
+    "waMessage": "Merhaba! Aura Stor'daki {collection} koleksiyonuyla ilgileniyorum. Parçalar hakkında daha fazla bilgi verebilir misiniz?"
+  },
+  "crystalGuide": {
+    "title": "Kristal Rehberi — Taş Özellikleri ve Anlamları",
+    "label": "Bilgi",
+    "subtitle": "Koleksiyonumuzdaki her taşın enerjisi, çakrası ve şifa özellikleri hakkında bilgi edinin.",
+    "properties": "Kristal Özellikleri",
+    "energy": "Enerji",
+    "chakra": "Çakra",
+    "idealFor": "İdeal Kullanım",
+    "origin": "Köken",
+    "hardness": "Sertlik",
+    "shopJewelry": "{crystal} Takılarını İncele",
+    "waMessage": "Merhaba! Kristal Rehberinizde {crystal} hakkında okudum ve {crystal} takısıyla ilgileniyorum. Yardımcı olabilir misiniz?",
+    "breadcrumbHome": "Ana Sayfa",
+    "breadcrumbGuide": "Kristal Rehberi",
+    "noResults": "Kristal bulunamadı.",
+    "searchPlaceholder": "Kristal ara…",
+    "allCrystals": "Tüm Kristaller"
+  },
+  "about": {
+    "title": "Hakkımızda"
+  },
+  "contact": {
+    "title": "İletişim"
+  },
+  "faq": {
+    "title": "SSS | Sıkça Sorulan Sorular"
+  },
+  "giftSets": {
+    "title": "Hediye Setleri"
+  },
+  "customOrders": {
+    "title": "Özel Siparişler"
+  },
+  "shipping": {
+    "title": "Kargo ve Teslimat"
+  },
+  "returns": {
+    "title": "İadeler ve Değişimler"
+  },
+  "reviews": {
+    "sectionLabel": "Müşteri Sevgisi",
+    "title": "Aura Stor Deneyiminizi Paylaşın",
+    "subtitle": "Hikayeniz büyümemize yardımcı olur. Gerçek müşterilerden gerçek yorumlar.",
+    "writeReview": "Yorum Yaz ✦",
+    "backToReviews": "← Yorumlara Dön",
+    "ratingLabel": "Puanınız",
+    "messageLabel": "Yorumunuz",
+    "messagePlaceholder": "Deneyiminizi anlatın — kalite, hisleriniz veya parçanızda sevdiğiniz şeyler…",
+    "nameLabel": "Adınız (isteğe bağlı)",
+    "locationLabel": "Ülke / Şehir (isteğe bağlı)",
+    "productLabel": "Satın Alınan Ürün (isteğe bağlı)",
+    "charCount": "{current}/500",
+    "submit": "Yorum Gönder",
+    "submitting": "Gönderiliyor…",
+    "disclaimer": "Yorumlar denetlenir ve onaylandıktan sonra bu sayfada görünür.",
+    "ratingRequired": "Lütfen bir yıldız puanı seçin.",
+    "messageRequired": "Lütfen bir yorum yazın.",
+    "networkError": "Bir şeyler ters gitti. Lütfen biraz sonra tekrar deneyin.",
+    "successTitle": "Teşekkürler",
+    "successMessage": "Yorumunuz alındı ve onaylandıktan sonra yayımlanacak.",
+    "emptyTitle": "Aura Stor deneyiminizi paylaşan ilk kişi olun.",
+    "emptyBody": "Kalite ve güven üzerine kurulu yeni bir markayız. Dürüst sözleriniz bizim için her şeydir ve başkalarının doğru parçayı bulmasına yardımcı olur.",
+    "emptyCta": "İlk yorumu siz yazın",
+    "anonymous": "Anonim",
+    "ratingLabels": {
+      "1": "Kötü",
+      "2": "Orta",
+      "3": "İyi",
+      "4": "Çok İyi",
+      "5": "Mükemmel ✦"
+    }
+  },
+  "footer": {
+    "shopLabel": "Mağaza",
+    "discoverLabel": "Keşfet",
+    "supportLabel": "Destek",
+    "legalLabel": "Yasal",
+    "tagline": "Enerjini Taşı.",
+    "copyright": "© {year} Aura Stor. Tüm hakları saklıdır.",
+    "madeWith": "Niyetle el yapımı.",
+    "allProducts": "Tüm Ürünler",
+    "crystalBracelets": "Kristal Bileklikler",
+    "crystalNecklaces": "Kristal Kolyeler",
+    "crystalRings": "Kristal Yüzükler",
+    "crystalSets": "Kristal Setler",
+    "giftSets": "Hediye Setleri",
+    "crystalGuide": "Kristal Rehberi",
+    "aboutAuraStor": "Aura Stor Hakkında",
+    "customOrders": "Özel Siparişler",
+    "featuredCollections": "Öne Çıkan Koleksiyonlar",
+    "faq": "SSS",
+    "contactUs": "Bize Ulaşın",
+    "shippingDelivery": "Kargo ve Teslimat",
+    "returnsExchanges": "İadeler ve Değişimler",
+    "privacyPolicy": "Gizlilik Politikası",
+    "termsConditions": "Kullanım Koşulları"
+  },
+  "metadata": {
+    "homeTitle": "Aura Stor — Lüks Kristal Takı | Doğal Taş Aksesuarları",
+    "homeDescription": "Aura Stor'da el yapımı doğal kristal takıları keşfedin. Tiger's Eye, Howlite, Jade ve Aventurine bileklikler, yüzükler ve setler. WhatsApp'tan sipariş verin. Suudi Arabistan, BAE ve Katar'a kargo.",
+    "shopTitle": "Kristal Takı Mağazası",
+    "collectionsTitle": "Kristal Takı Koleksiyonları",
+    "crystalGuideTitle": "Kristal Rehberi — Taş Özellikleri ve Anlamları",
+    "aboutTitle": "Hakkımızda",
+    "contactTitle": "İletişim",
+    "faqTitle": "SSS | Sıkça Sorulan Sorular",
+    "giftSetsTitle": "Hediye Setleri",
+    "customOrdersTitle": "Özel Siparişler",
+    "shippingTitle": "Kargo ve Teslimat",
+    "returnsTitle": "İadeler ve Değişimler",
+    "privacyTitle": "Gizlilik Politikası",
+    "termsTitle": "Kullanım Koşulları"
+  }
+}

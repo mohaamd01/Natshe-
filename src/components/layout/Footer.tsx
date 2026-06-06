@@ -1,19 +1,49 @@
-﻿﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
-import { FOOTER_LINKS, SITE_CONFIG, SOCIAL, CONTACT } from "@/lib/constants";
+import { SITE_CONFIG, SOCIAL, CONTACT } from "@/lib/constants";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
+import { getTranslations } from "next-intl/server";
 
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear();
+  const t = await getTranslations("footer");
+
+  const shopLinks = [
+    { label: t("allProducts"), href: "/shop" },
+    { label: t("crystalBracelets"), href: "/shop/crystal-bracelets" },
+    { label: t("crystalNecklaces"), href: "/shop/crystal-necklaces" },
+    { label: t("crystalRings"), href: "/shop/crystal-rings" },
+    { label: t("crystalSets"), href: "/shop/crystal-sets" },
+    { label: t("giftSets"), href: "/gift-sets" },
+  ];
+
+  const discoverLinks = [
+    { label: t("crystalGuide"), href: "/crystal-guide" },
+    { label: t("aboutAuraStor"), href: "/about" },
+    { label: t("customOrders"), href: "/custom-orders" },
+    { label: t("featuredCollections"), href: "/collections" },
+  ];
+
+  const supportLinks = [
+    { label: t("faq"), href: "/faq" },
+    { label: t("contactUs"), href: "/contact" },
+    { label: t("shippingDelivery"), href: "/shipping" },
+    { label: t("returnsExchanges"), href: "/returns" },
+  ];
+
+  const legalLinks = [
+    { label: t("privacyPolicy"), href: "/privacy" },
+    { label: t("termsConditions"), href: "/terms" },
+  ];
 
   return (
     <footer className="bg-brown text-ivory/80">
       {/* Main grid */}
       <div className="container-luxury py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
-          {/* Brand column â€” takes 2 cols on large */}
+          {/* Brand column — takes 2 cols on large */}
           <div className="lg:col-span-2 space-y-5">
-            <Link href="/" aria-label="Aura Stor â€” Home">
+            <Link href="/" aria-label="Aura Stor — Home">
               <Image
                 src="/images/logo/aura-stor-logo.png"
                 alt="Aura Stor"
@@ -28,7 +58,7 @@ export default function Footer() {
             </p>
 
             <p className="font-serif italic text-xl text-gold/80 tracking-wide">
-              {SITE_CONFIG.tagline}
+              {t("tagline")}
             </p>
 
             {/* Social links */}
@@ -63,19 +93,19 @@ export default function Footer() {
               className="inline-flex items-center gap-2 bg-whatsapp text-white text-xs font-sans font-semibold tracking-wide px-5 py-2.5 rounded-full shadow-whatsapp hover:opacity-90 transition-opacity duration-200"
             >
               <WhatsAppIcon className="w-4 h-4" />
-              Order via WhatsApp
+              {t("contactUs")}
             </a>
           </div>
 
           {/* Shop */}
-          <FooterColumn title="Shop" links={FOOTER_LINKS.shop} />
+          <FooterColumn title={t("shopLabel")} links={shopLinks} />
 
           {/* Discover */}
-          <FooterColumn title="Discover" links={FOOTER_LINKS.discover} />
+          <FooterColumn title={t("discoverLabel")} links={discoverLinks} />
 
           {/* Support */}
           <div className="space-y-4">
-            <FooterColumn title="Support" links={FOOTER_LINKS.support} />
+            <FooterColumn title={t("supportLabel")} links={supportLinks} />
 
             {/* Business hours */}
             <div className="pt-4 border-t border-ivory/10 space-y-1">
@@ -100,10 +130,10 @@ export default function Footer() {
       <div className="border-t border-ivory/10">
         <div className="container-luxury py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs font-sans text-ivory/30">
-            آ© {currentYear} {SITE_CONFIG.name}. All rights reserved.
+            {t("copyright", { year: currentYear })}
           </p>
           <div className="flex items-center gap-5">
-            {FOOTER_LINKS.legal.map((link) => (
+            {legalLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -172,4 +202,3 @@ function FacebookIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-

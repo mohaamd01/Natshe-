@@ -1,0 +1,342 @@
+{
+  "common": {
+    "siteName": "Aura Stor",
+    "loading": "Loading…",
+    "close": "Close",
+    "back": "Back",
+    "viewAll": "View All",
+    "shopNow": "Shop Now",
+    "learnMore": "Learn More",
+    "anonymous": "Anonymous"
+  },
+  "promoBanner": {
+    "text": "Shipping to Saudi Arabia, UAE & Qatar",
+    "highlight": "Free on Orders Above $50"
+  },
+  "nav": {
+    "shop": "Shop",
+    "collections": "Collections",
+    "crystalGuide": "Crystal Guide",
+    "giftSets": "Gift Sets",
+    "about": "About",
+    "contact": "Contact",
+    "orderViaWhatsApp": "Order via WhatsApp",
+    "switchLanguage": "TR"
+  },
+  "hero": {
+    "eyebrow": "Luxury Crystal Jewelry",
+    "tagline": "Wear Your Energy.",
+    "promise": "Born from Earth. Worn with Intention.",
+    "shipping": "Shipping to Saudi Arabia, UAE & Qatar",
+    "ctaShop": "Shop the Collection",
+    "ctaWhatsApp": "Order via WhatsApp",
+    "scroll": "Scroll",
+    "badge1Label": "Natural Stones",
+    "badge1Sub": "100% Genuine",
+    "badge2Label": "Free Shipping",
+    "badge2Sub": "Orders above $50",
+    "badge3Label": "WhatsApp Order",
+    "badge3Sub": "Personal service",
+    "waMessage": "Hello! I found Aura Stor and I'd love to explore your crystal jewelry collection."
+  },
+  "whyAuraStor": {
+    "label": "Our Promise",
+    "title": "Why Aura Stor",
+    "subtitle": "Every detail is considered — from the stone we source to the moment it arrives at your door.",
+    "natural": {
+      "title": "Natural Gemstones",
+      "description": "Every stone is 100% genuine — sourced ethically, never synthetic, never treated. You wear the real earth."
+    },
+    "shipping": {
+      "title": "Fast Gulf Shipping",
+      "description": "Quick, tracked delivery across Saudi Arabia, UAE, and Qatar. Your order arrives carefully packaged."
+    },
+    "handcrafted": {
+      "title": "Handcrafted Jewelry",
+      "description": "Each piece is crafted by hand with precision and care — no mass production, no shortcuts."
+    },
+    "support": {
+      "title": "WhatsApp Support",
+      "description": "Order, ask questions, or track your delivery — all via WhatsApp. Real people, genuine care."
+    }
+  },
+  "howItWorks": {
+    "label": "Simple Process",
+    "title": "How It Works",
+    "subtitle": "From browsing to unboxing — ordering your crystal jewelry is as easy as sending a message.",
+    "step1": {
+      "number": "01",
+      "title": "Choose Your Stone",
+      "description": "Browse our curated collections of natural crystal jewelry. Each piece lists the stone's energy, chakra, and properties to help you find the right match.",
+      "cta": "Browse Collections"
+    },
+    "step2": {
+      "number": "02",
+      "title": "Place Your Order",
+      "description": "Message us on WhatsApp with the piece you want. We confirm availability, answer any questions, and arrange your order — no checkout forms, no accounts needed.",
+      "cta": "Order via WhatsApp"
+    },
+    "step3": {
+      "number": "03",
+      "title": "Receive & Enjoy",
+      "description": "Your jewelry is packed with care and shipped to your door. Track your delivery via WhatsApp and receive your natural crystal piece exactly as pictured.",
+      "cta": "See Our Shop"
+    }
+  },
+  "trust": {
+    "label": "Customer Love",
+    "title": "Why Customers Love Aura Stor",
+    "subtitle": "Thousands of happy customers across the Gulf trust us for their crystal jewelry.",
+    "item1": {
+      "stat": "100%",
+      "title": "Premium Natural Stones",
+      "description": "Every gemstone is authentic and ethically sourced. We never use synthetics, dyes, or imitations — what you see is what you receive."
+    },
+    "item2": {
+      "stat": "Secure",
+      "title": "Secure Ordering Process",
+      "description": "Order directly via WhatsApp with full transparency. You know exactly what you're getting, at what price, before any payment is made."
+    },
+    "item3": {
+      "stat": "3 Countries",
+      "title": "Fast International Shipping",
+      "description": "We ship across Saudi Arabia, UAE, and Qatar with tracked delivery. Your order is packaged with care and arrives in perfect condition."
+    },
+    "item4": {
+      "stat": "Personal",
+      "title": "Personalized Customer Support",
+      "description": "No bots, no ticket queues. Message us on WhatsApp and get a real response from a real person, seven days a week."
+    },
+    "ornament": "Handcrafted with intention"
+  },
+  "brandStory": {
+    "label": "Our Story",
+    "title": "Born from Earth.",
+    "titleItalic": "Worn with Intention.",
+    "body1": "Aura Stor began with a simple belief: the stones we wear carry more than beauty. Every crystal formed over millions of years underground carries an energy — a frequency — that quietly interacts with our own.",
+    "body2": "We curate and craft each piece from 100% natural gemstones, chosen for their quality and their energy. No synthetics. No shortcuts. Just the earth, shaped with intention.",
+    "pullQuote": "\"The right stone finds the right person.\"",
+    "pillar1Label": "Natural Only",
+    "pillar1": "Every stone is 100% genuine — never synthetic, never treated, never imitation.",
+    "pillar2Label": "Intentional Design",
+    "pillar2": "Each piece is designed to be worn as a daily reminder of your energy and intention.",
+    "pillar3Label": "Personal Service",
+    "pillar3": "Order directly via WhatsApp. Real people, real conversation, real care.",
+    "readMore": "Read our story"
+  },
+  "categories": {
+    "label": "Explore",
+    "title": "Shop by Category",
+    "subtitle": "Handcrafted from natural gemstones. Each piece is one-of-a-kind.",
+    "viewAll": "View All Products",
+    "shopNow": "Shop now"
+  },
+  "bestSellers": {
+    "label": "Customer Favourites",
+    "title": "Best Sellers",
+    "subtitle": "Our most loved pieces — chosen by customers who wear their energy.",
+    "bestSeller": "Best Seller",
+    "newArrival": "New Arrival",
+    "viewAll": "View All Products",
+    "orderWhatsApp": "Order via WhatsApp"
+  },
+  "stoneOfMonth": {
+    "label": "Stone of the Month",
+    "propertiesLabel": "Crystal Properties",
+    "viewGuide": "Read Full Crystal Guide",
+    "shopStone": "Shop {stone} Jewelry",
+    "waMessage": "Hello! I'm interested in {stone} jewelry from Aura Stor. Can you help me choose a piece?"
+  },
+  "crystalGuideTeaser": {
+    "label": "Knowledge",
+    "title": "Crystal Guide",
+    "subtitle": "Learn about the energy, chakra, and healing properties of every stone in our collection.",
+    "exploreAll": "Explore All Crystals",
+    "learnMore": "Learn more"
+  },
+  "instagramFeed": {
+    "label": "Follow Our Journey",
+    "title": "Aura Stor on Instagram",
+    "handle": "@aura._sto",
+    "follow": "Follow on Instagram"
+  },
+  "whatsappCTA": {
+    "label": "How to Order",
+    "title": "Order Directly via WhatsApp.",
+    "titleItalic": "Personally. Instantly.",
+    "subtitle": "No checkout forms. No accounts. Just a conversation with our team — and your piece, beautifully packed and on its way.",
+    "step1Number": "01",
+    "step1Title": "Browse & Choose",
+    "step1Desc": "Explore our collection and find the stone that speaks to you.",
+    "step2Number": "02",
+    "step2Title": "Message Us",
+    "step2Desc": "Tap any WhatsApp button and tell us which piece you love.",
+    "step3Number": "03",
+    "step3Title": "We Confirm & Ship",
+    "step3Desc": "We confirm availability and ship your order in beautiful packaging.",
+    "cta": "Start Your Order on WhatsApp",
+    "available": "Available {days}",
+    "hours": "{hours}",
+    "response": "Response: {time}",
+    "assurance1": "Free shipping on orders above $50",
+    "assurance2": "Ships to Saudi Arabia, UAE & Qatar",
+    "assurance3": "Velvet gift packaging included",
+    "assurance4": "14-day return policy",
+    "waMessage": "Hello! I'd like to place an order with Aura Stor. Can you help me find the right piece?"
+  },
+  "shop": {
+    "title": "Shop Crystal Jewelry",
+    "all": "All",
+    "products": "{count} products",
+    "product": "{count} product",
+    "empty": "No products in this category yet.",
+    "viewAll": "View all products",
+    "freeShipping": "Free shipping on orders above $50",
+    "bestSeller": "Best Seller",
+    "newArrival": "New Arrival",
+    "orderWhatsApp": "Order via WhatsApp",
+    "replyTime": "We reply within a few hours",
+    "businessHours": "Mon – Sun, 9 AM – 10 PM",
+    "breadcrumbHome": "Home",
+    "breadcrumbShop": "Shop",
+    "crystalGuideLink": "Discover the energy of {crystal}",
+    "comingSoon": "Coming Soon",
+    "comingSoonBody": "We're putting the finishing touches on this collection. Check back soon.",
+    "notifyWhatsApp": "Notify me on WhatsApp"
+  },
+  "product": {
+    "waMessage": "Hello! I'd like to order the \"{product}\" from Aura Stor. Is it available? Price shown: {price}"
+  },
+  "collections": {
+    "title": "Crystal Jewelry Collections",
+    "subtitle": "Each collection is a curated energy journey.",
+    "label": "Collections",
+    "enquire": "Enquire via WhatsApp",
+    "aboutCollection": "About This Collection",
+    "thePieces": "The Pieces",
+    "shopCollection": "Shop the Collection",
+    "theStone": "The Stone",
+    "otherCollections": "Other Collections",
+    "continueExploring": "Continue Exploring",
+    "viewAll": "View all collections",
+    "viewAllProducts": "View all products",
+    "breadcrumbHome": "Home",
+    "breadcrumbCollections": "Collections",
+    "stoneCollection": "{stone} Collection",
+    "readFullGuide": "Read the Full {crystal} Guide",
+    "waMessage": "Hello! I'm interested in the {collection} collection at Aura Stor. Can you tell me more about the pieces?"
+  },
+  "crystalGuide": {
+    "title": "Crystal Guide — Gemstone Properties & Meanings",
+    "label": "Knowledge",
+    "subtitle": "Discover the energy, chakra, and healing properties of every stone in our collection.",
+    "properties": "Crystal Properties",
+    "energy": "Energy",
+    "chakra": "Chakra",
+    "idealFor": "Ideal For",
+    "origin": "Origin",
+    "hardness": "Hardness",
+    "shopJewelry": "Shop {crystal} Jewelry",
+    "waMessage": "Hello! I just read about {crystal} on your Crystal Guide and I'm interested in {crystal} jewelry. Can you help me?",
+    "breadcrumbHome": "Home",
+    "breadcrumbGuide": "Crystal Guide",
+    "noResults": "No crystals found.",
+    "searchPlaceholder": "Search crystals…",
+    "allCrystals": "All Crystals"
+  },
+  "about": {
+    "title": "About Us"
+  },
+  "contact": {
+    "title": "Contact Us"
+  },
+  "faq": {
+    "title": "FAQ | Frequently Asked Questions"
+  },
+  "giftSets": {
+    "title": "Gift Sets"
+  },
+  "customOrders": {
+    "title": "Custom Orders"
+  },
+  "shipping": {
+    "title": "Shipping & Delivery"
+  },
+  "returns": {
+    "title": "Returns & Exchanges"
+  },
+  "reviews": {
+    "sectionLabel": "Customer Love",
+    "title": "Share Your Aura Stor Experience",
+    "subtitle": "Your story helps us grow. Real reviews from real customers.",
+    "writeReview": "Write a Review ✦",
+    "backToReviews": "← Back to Reviews",
+    "ratingLabel": "Your Rating",
+    "messageLabel": "Your Review",
+    "messagePlaceholder": "Tell us about your experience — the quality, how it made you feel, or what you love about your piece…",
+    "nameLabel": "Your Name (optional)",
+    "locationLabel": "Country / City (optional)",
+    "productLabel": "Product Purchased (optional)",
+    "charCount": "{current}/500",
+    "submit": "Submit Review",
+    "submitting": "Submitting…",
+    "disclaimer": "Reviews are moderated and will appear on this page after approval.",
+    "ratingRequired": "Please select a star rating.",
+    "messageRequired": "Please write a review message.",
+    "networkError": "Something went wrong. Please try again in a moment.",
+    "successTitle": "Thank You",
+    "successMessage": "Your review has been received and will appear after approval.",
+    "emptyTitle": "Be the first to share your Aura Stor experience.",
+    "emptyBody": "We are a new brand built on quality and trust. Your honest words mean everything — and help others find the right piece for them.",
+    "emptyCta": "Write the first review",
+    "anonymous": "Anonymous",
+    "ratingLabels": {
+      "1": "Poor",
+      "2": "Fair",
+      "3": "Good",
+      "4": "Great",
+      "5": "Excellent ✦"
+    }
+  },
+  "footer": {
+    "shopLabel": "Shop",
+    "discoverLabel": "Discover",
+    "supportLabel": "Support",
+    "legalLabel": "Legal",
+    "tagline": "Wear Your Energy.",
+    "copyright": "© {year} Aura Stor. All rights reserved.",
+    "madeWith": "Handcrafted with intention.",
+    "allProducts": "All Products",
+    "crystalBracelets": "Crystal Bracelets",
+    "crystalNecklaces": "Crystal Necklaces",
+    "crystalRings": "Crystal Rings",
+    "crystalSets": "Crystal Sets",
+    "giftSets": "Gift Sets",
+    "crystalGuide": "Crystal Guide",
+    "aboutAuraStor": "About Aura Stor",
+    "customOrders": "Custom Orders",
+    "featuredCollections": "Featured Collections",
+    "faq": "FAQ",
+    "contactUs": "Contact Us",
+    "shippingDelivery": "Shipping & Delivery",
+    "returnsExchanges": "Returns & Exchanges",
+    "privacyPolicy": "Privacy Policy",
+    "termsConditions": "Terms & Conditions"
+  },
+  "metadata": {
+    "homeTitle": "Aura Stor — Luxury Crystal Jewelry | Natural Gemstone Accessories",
+    "homeDescription": "Discover handcrafted natural crystal jewelry at Aura Stor. Tiger's Eye, Howlite, Jade & Aventurine bracelets, rings and sets. Order via WhatsApp. Shipping to Saudi Arabia, UAE & Qatar.",
+    "shopTitle": "Shop Crystal Jewelry",
+    "collectionsTitle": "Crystal Jewelry Collections",
+    "crystalGuideTitle": "Crystal Guide — Gemstone Properties & Meanings",
+    "aboutTitle": "About Us",
+    "contactTitle": "Contact Us",
+    "faqTitle": "FAQ | Frequently Asked Questions",
+    "giftSetsTitle": "Gift Sets",
+    "customOrdersTitle": "Custom Orders",
+    "shippingTitle": "Shipping & Delivery",
+    "returnsTitle": "Returns & Exchanges",
+    "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms & Conditions"
+  }
+}

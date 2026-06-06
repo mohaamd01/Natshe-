@@ -1,20 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { navItems } from "@/data/navigation";
 import MobileMenu from "./MobileMenu";
-
-// Quick links shown in the mobile sub-row (Option A)
-const QUICK_LINKS = [
-  { label: "Shop", href: "/shop" },
-  { label: "Collections", href: "/collections" },
-  { label: "Crystal Guide", href: "/crystal-guide" },
-];
+import { useTranslations, useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 // Pages where the header starts over a dark background — white text is readable at scrollY=0.
 // All other pages have light ivory backgrounds, so we always use scrolled (brown) text.
@@ -28,6 +22,22 @@ function useIsHeroPage() {
 }
 
 export default function Header() {
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const QUICK_LINKS = [
+    { label: t("shop"), href: "/shop" },
+    { label: t("collections"), href: "/collections" },
+    { label: t("crystalGuide"), href: "/crystal-guide" },
+  ];
+
+  function switchLocale() {
+    const next = locale === "en" ? "tr" : "en";
+    router.replace(pathname, { locale: next });
+  }
+
   const [scrollY, setScrollY]           = useState(0);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen]     = useState(false);
@@ -170,16 +180,30 @@ export default function Header() {
 
             {/* Right actions */}
             <div className="flex items-center gap-2 md:gap-3">
+              {/* Locale switcher — desktop only */}
+              <button
+                onClick={switchLocale}
+                className={cn(
+                  "hidden lg:flex font-sans text-[12px] font-medium tracking-[0.08em] transition-colors duration-300 px-2.5 py-1 rounded border",
+                  isScrolled
+                    ? "text-brown/60 border-brown/20 hover:border-sage/50 hover:text-sage"
+                    : "text-ivory/70 border-white/25 hover:border-white/60 hover:text-white"
+                )}
+                aria-label={`Switch to ${locale === "en" ? "Turkish" : "English"}`}
+              >
+                {t("switchLanguage")}
+              </button>
+
               {/* WhatsApp pill — desktop only */}
               <a
                 href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden lg:flex items-center gap-2 bg-whatsapp text-white text-xs font-sans font-semibold tracking-wide px-4 py-2 rounded-full shadow-whatsapp hover:opacity-90 transition-opacity duration-200"
-                aria-label="Order via WhatsApp"
+                aria-label={t("orderViaWhatsApp")}
               >
                 <WhatsAppIcon className="w-3.5 h-3.5" />
-                Order via WhatsApp
+                {t("orderViaWhatsApp")}
               </a>
 
               {/* Hamburger — mobile */}
