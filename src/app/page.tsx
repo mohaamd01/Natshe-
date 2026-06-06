@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/sections/HeroSection";
+import WhyAuraStor from "@/components/sections/WhyAuraStor";
 import CategoryGrid from "@/components/sections/CategoryGrid";
 import BestSellers from "@/components/sections/BestSellers";
+import HowItWorks from "@/components/sections/HowItWorks";
 import BrandStory from "@/components/sections/BrandStory";
 import StoneOfMonth from "@/components/sections/StoneOfMonth";
+import TrustSection from "@/components/sections/TrustSection";
 import CrystalGuideTeaser from "@/components/sections/CrystalGuideTeaser";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import InstagramFeed from "@/components/sections/InstagramFeed";
@@ -19,10 +22,13 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <WhyAuraStor />
       <CategoryGrid />
       <BestSellers />
+      <HowItWorks />
       <BrandStory />
       <StoneOfMonth />
+      <TrustSection />
       <CrystalGuideTeaser />
       <TestimonialsSection />
       <InstagramFeed />
