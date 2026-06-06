@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { products, getProductBySlug, getProductsByCategory, getRelatedProducts } from "@/data/products";
 import { getCrystalByType } from "@/data/crystals";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
@@ -15,6 +15,7 @@ import RelatedProducts from "@/components/shop/RelatedProducts";
 import StickyMobileWhatsAppBar from "@/components/shop/StickyMobileWhatsAppBar";
 import ComingSoon from "@/components/shop/ComingSoon";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { setRequestLocale } from "next-intl/server";
 
 export function generateStaticParams() {
   const categorySlugs = PRODUCT_CATEGORIES.map((c) => ({ locale: "en", slug: c.slug }));
@@ -55,7 +56,8 @@ export default async function ShopSlugPage({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
 
   const category = PRODUCT_CATEGORIES.find((c) => c.slug === slug);
   if (category) {

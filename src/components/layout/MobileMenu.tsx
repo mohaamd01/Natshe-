@@ -1,7 +1,6 @@
 ﻿"use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
@@ -9,7 +8,7 @@ import { navItems } from "@/data/navigation";
 import { SOCIAL, SITE_CONFIG } from "@/lib/constants";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
-import { usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 interface MobileMenuProps {
   open: boolean;

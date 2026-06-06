@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -68,10 +68,15 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  const messages = await getMessages();
+  // Must be called before any locale-dependent async calls so the request
+  // context is populated for all child server components (sections, etc.)
+  setRequestLocale(locale);
+
+  // Explicit locale to getMessages so static pre-renders use the right locale
+  const messages = await getMessages({ locale } as { locale: string });
 
   return (
-    <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages}>
       <PromoBanner />
       <Header />
       <main>{children}</main>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { crystals, getCrystalBySlug, getCrystalByType } from "@/data/crystals";
@@ -7,6 +7,7 @@ import { getProductsByStone } from "@/data/products";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { ScrollReveal, StaggerReveal } from "@/components/ui/ScrollReveal";
 import ProductGrid from "@/components/shop/ProductGrid";
+import { setRequestLocale } from "next-intl/server";
 
 export function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
@@ -38,7 +39,8 @@ export default async function CrystalDetailPage({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const crystal = getCrystalBySlug(slug);
   if (!crystal) notFound();
 

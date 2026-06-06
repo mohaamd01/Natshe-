@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { SITE_CONFIG, SOCIAL, CONTACT } from "@/lib/constants";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
