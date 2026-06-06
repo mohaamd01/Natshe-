@@ -134,12 +134,28 @@ export default function Header() {
                   {/* Dropdown */}
                   {item.children && activeDropdown === item.label && (
                     <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 min-w-[200px]">
-                      <div className="bg-white/96 backdrop-blur-xl rounded-xl shadow-hover border border-sage/10 overflow-hidden py-1.5">
+                      <div
+                        className="rounded-xl overflow-hidden py-1.5"
+                        style={{
+                          backgroundColor: "#FFFFFF",
+                          border: "1px solid rgba(80,60,40,0.08)",
+                          boxShadow: "0 12px 40px rgba(0,0,0,0.08)",
+                        }}
+                      >
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="block px-5 py-2.5 text-[13px] font-sans text-brown/80 hover:text-sage hover:bg-sage/5 transition-colors duration-150"
+                            className="block px-5 py-2.5 text-[13px] font-sans transition-colors duration-150"
+                            style={{ color: "#4A382C" }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = "rgba(112,140,116,0.08)";
+                              e.currentTarget.style.color = "#2F4F3A";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = "";
+                              e.currentTarget.style.color = "#4A382C";
+                            }}
                             onClick={() => setActiveDropdown(null)}
                           >
                             {child.label}
