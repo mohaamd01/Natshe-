@@ -6,6 +6,7 @@ import { getCrystalByType } from "@/data/crystals";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
 import { formatPrice } from "@/lib/utils";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { localized } from "@/lib/localize";
 import PageHeader from "@/components/layout/PageHeader";
 import ProductGrid from "@/components/shop/ProductGrid";
 import ProductGallery from "@/components/shop/ProductGallery";
@@ -30,7 +31,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
 
   const category = PRODUCT_CATEGORIES.find((c) => c.slug === slug);
   if (category) {
@@ -43,8 +44,8 @@ export async function generateMetadata({
   const product = getProductBySlug(slug);
   if (product) {
     return {
-      title: product.name,
-      description: product.shortDescription,
+      title: localized(product.name, locale),
+      description: localized(product.shortDescription, locale),
     };
   }
 
@@ -76,8 +77,9 @@ export default async function ShopSlugPage({
 
   const product = getProductBySlug(slug);
   if (product) {
-    const waMessage = tProduct("waMessage", { product: product.name, price: formatPrice(product.price) });
-    return <ProductDetailPage slug={slug} t={t} waMessage={waMessage} />;
+    const name = localized(product.name, locale);
+    const waMessage = tProduct("waMessage", { product: name, price: formatPrice(product.price) });
+    return <ProductDetailPage slug={slug} locale={locale} t={t} waMessage={waMessage} />;
   }
 
   notFound();
@@ -150,11 +152,26 @@ function CategoryPage({
   );
 }
 
-function ProductDetailPage({ slug, t, waMessage }: { slug: string; t: TFunction; waMessage: string }) {
+function ProductDetailPage({
+  slug,
+  locale,
+  t,
+  waMessage,
+}: {
+  slug: string;
+  locale: string;
+  t: TFunction;
+  waMessage: string;
+}) {
   const product = getProductBySlug(slug)!;
   const related = getRelatedProducts(product.relatedProductIds ?? []);
   const categoryLabel = PRODUCT_CATEGORIES.find((c) => c.slug === product.category)?.label ?? "Shop";
   const crystal = getCrystalByType(product.stone);
+
+  const name = localized(product.name, locale);
+  const stoneName = localized(product.stoneName, locale);
+  const shortDescription = localized(product.shortDescription, locale);
+  const description = localized(product.description, locale);
 
   function WhatsAppIcon({ className }: { className?: string }) {
     return (
@@ -167,8 +184,8 @@ function ProductDetailPage({ slug, t, waMessage }: { slug: string; t: TFunction;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: product.name,
-    description: product.description,
+    name: name,
+    description: description,
     image: product.images.map((img) => `https://aurastor.com${img.src}`),
     brand: { "@type": "Brand", name: "Aura Stor" },
     offers: {
@@ -183,7 +200,7 @@ function ProductDetailPage({ slug, t, waMessage }: { slug: string; t: TFunction;
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <StickyMobileWhatsAppBar productName={product.name} price={product.price} />
+      <StickyMobileWhatsAppBar productName={name} price={product.price} />
       <div className="pt-[120px] lg:pt-[100px] bg-ivory" />
 
       <div className="bg-ivory border-b border-brown/10">
@@ -195,7 +212,7 @@ function ProductDetailPage({ slug, t, waMessage }: { slug: string; t: TFunction;
             <span>/</span>
             <Link href={`/shop/${product.category}`} className="hover:text-sage transition-colors duration-200">{categoryLabel}</Link>
             <span>/</span>
-            <span className="text-brown/70 truncate max-w-[160px]">{product.name}</span>
+            <span className="text-brown/70 truncate max-w-[160px]">{name}</span>
           </nav>
         </div>
       </div>
@@ -204,7 +221,7 @@ function ProductDetailPage({ slug, t, waMessage }: { slug: string; t: TFunction;
         <div className="container-luxury pt-8 md:pt-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
             <ScrollReveal direction="left" threshold={0}>
-              <ProductGallery images={product.images} productName={product.name} />
+              <ProductGallery images={product.images} productName={name} />
             </ScrollReveal>
 
             <ScrollReveal direction="right" threshold={0} className="flex flex-col gap-6">
@@ -222,9 +239,9 @@ function ProductDetailPage({ slug, t, waMessage }: { slug: string; t: TFunction;
               </div>
 
               <div>
-                <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-sage mb-2">{product.stoneName}</p>
+                <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-sage mb-2">{stoneName}</p>
                 <h1 className="font-serif font-light text-brown leading-tight" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)" }}>
-                  {product.name}
+                  {name}
                 </h1>
               </div>
 
@@ -233,8 +250,8 @@ function ProductDetailPage({ slug, t, waMessage }: { slug: string; t: TFunction;
                 <span className="font-sans text-xs text-brown/40 tracking-wide">{t("freeShipping")}</span>
               </div>
 
-              <p className="font-sans text-sm text-brown/65 leading-relaxed border-t border-brown/10 pt-5">{product.shortDescription}</p>
-              <p className="font-sans text-sm text-brown/55 leading-relaxed">{product.description}</p>
+              <p className="font-sans text-sm text-brown/65 leading-relaxed border-t border-brown/10 pt-5">{shortDescription}</p>
+              <p className="font-sans text-sm text-brown/55 leading-relaxed">{description}</p>
 
               <div className="hidden md:flex flex-col gap-3 pt-2">
                 <a
@@ -265,7 +282,7 @@ function ProductDetailPage({ slug, t, waMessage }: { slug: string; t: TFunction;
                   <span className="text-gold text-base leading-none">✦</span>
                   <div className="flex-1 min-w-0">
                     <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-brown/40 mb-0.5">{t("crystalGuideLabel")}</p>
-                    <p className="font-sans text-sm text-brown font-medium truncate">{t("crystalGuideLink", { crystal: crystal.name })}</p>
+                    <p className="font-sans text-sm text-brown font-medium truncate">{t("crystalGuideLink", { crystal: localized(crystal.name, locale) })}</p>
                   </div>
                   <span className="text-brown/30 group-hover:text-sage text-sm transition-colors duration-200">&rarr;</span>
                 </Link>

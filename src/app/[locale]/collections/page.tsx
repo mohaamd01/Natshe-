@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { collections } from "@/data/collections";
+import { localized } from "@/lib/localize";
 import PageHeader from "@/components/layout/PageHeader";
 import { ScrollReveal, StaggerReveal } from "@/components/ui/ScrollReveal";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -65,11 +66,11 @@ export default async function CollectionsPage({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brown/80 via-brown/20 to-transparent" />
                   <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-gold/80 mb-2">{collection.stoneName}</p>
+                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-gold/80 mb-2">{localized(collection.stoneName, locale)}</p>
                     <h2 className="font-serif font-light text-ivory leading-tight mb-2" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}>
-                      {collection.name} {t("label")}
+                      {localized(collection.name, locale)} {t("label")}
                     </h2>
-                    <p className="font-serif italic text-ivory/60 text-sm font-light mb-4 line-clamp-2">&ldquo;{collection.tagline}&rdquo;</p>
+                    <p className="font-serif italic text-ivory/60 text-sm font-light mb-4 line-clamp-2">&ldquo;{localized(collection.tagline, locale)}&rdquo;</p>
                     <div className="inline-flex items-center gap-2 self-start bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 group-hover:bg-gold/20 group-hover:border-gold/30 transition-all duration-300">
                       <span className="font-sans text-xs text-ivory font-medium">{t("exploreCollection")}</span>
                       <span className="text-ivory/60 text-xs group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>

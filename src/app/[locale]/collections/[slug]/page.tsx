@@ -9,6 +9,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { ScrollReveal, StaggerReveal } from "@/components/ui/ScrollReveal";
 import ProductGrid from "@/components/shop/ProductGrid";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { localized } from "@/lib/localize";
 
 export function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
@@ -25,13 +26,16 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const collection = getCollectionBySlug(slug);
   if (!collection) return { title: "Not Found" };
 
+  const name = localized(collection.name, locale);
+  const description = localized(collection.description, locale);
+
   return {
-    title: `${collection.name} Collection | Natural Crystal Jewelry`,
-    description: `${collection.description} Shop the ${collection.name} collection at Aura Stor.`,
+    title: `${name} Collection | Natural Crystal Jewelry`,
+    description: `${description} Shop the ${name} collection at Aura Stor.`,
   };
 }
 
@@ -51,7 +55,11 @@ export default async function CollectionDetailPage({
   const crystal = getCrystalByType(collection.stone);
   const otherCollections = collections.filter((c) => c.slug !== slug).slice(0, 3);
 
-  const waMessage = t("waMessage", { collection: collection.name });
+  const collectionName = localized(collection.name, locale);
+  const collectionStoneName = localized(collection.stoneName, locale);
+  const collectionDescription = localized(collection.description, locale);
+  const collectionTagline = localized(collection.tagline, locale);
+  const waMessage = t("waMessage", { collection: collectionName });
 
   function WhatsAppIcon({ className }: { className?: string }) {
     return (
@@ -65,13 +73,13 @@ export default async function CollectionDetailPage({
     <>
       <div className="relative w-full pt-[120px] lg:pt-[100px]" style={{ minHeight: "55vh" }}>
         <div className="absolute inset-0">
-          <Image src={collection.heroImage} alt={`${collection.name} crystal jewelry collection`} fill priority className="object-cover object-center" sizes="100vw" />
+          <Image src={collection.heroImage} alt={`${collectionName} crystal jewelry collection`} fill priority className="object-cover object-center" sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-b from-brown/70 via-brown/50 to-brown/80" />
         </div>
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 py-16 md:py-20 min-h-[55vh]">
-          <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-gold/80 mb-4">{t("stoneCollection", { stone: collection.stoneName })}</p>
-          <h1 className="font-serif font-light text-ivory leading-tight mb-4" style={{ fontSize: "clamp(2.2rem, 6vw, 4rem)" }}>{collection.name}</h1>
-          <p className="font-serif italic text-ivory/60 text-xl font-light mb-8 max-w-lg">&ldquo;{collection.tagline}&rdquo;</p>
+          <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-gold/80 mb-4">{t("stoneCollection", { stone: collectionStoneName })}</p>
+          <h1 className="font-serif font-light text-ivory leading-tight mb-4" style={{ fontSize: "clamp(2.2rem, 6vw, 4rem)" }}>{collectionName}</h1>
+          <p className="font-serif italic text-ivory/60 text-xl font-light mb-8 max-w-lg">&ldquo;{collectionTagline}&rdquo;</p>
           <a
             href={buildWhatsAppUrl(waMessage)}
             target="_blank"
@@ -91,7 +99,7 @@ export default async function CollectionDetailPage({
             <span>/</span>
             <Link href="/collections" className="hover:text-sage transition-colors duration-200">{t("breadcrumbCollections")}</Link>
             <span>/</span>
-            <span className="text-brown/70">{collection.name}</span>
+            <span className="text-brown/70">{collectionName}</span>
           </nav>
         </div>
       </div>
@@ -100,7 +108,7 @@ export default async function CollectionDetailPage({
         <div className="container-luxury max-w-2xl mx-auto text-center">
           <ScrollReveal>
             <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-sage mb-4">{t("aboutCollection")}</p>
-            <p className="font-sans text-sm text-brown/65 leading-loose">{collection.description}</p>
+            <p className="font-sans text-sm text-brown/65 leading-loose">{collectionDescription}</p>
           </ScrollReveal>
         </div>
       </section>
@@ -133,10 +141,10 @@ export default async function CollectionDetailPage({
               </ScrollReveal>
               <ScrollReveal direction="right" className="flex flex-col gap-5">
                 <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-gold/70">{t("theStone")}</p>
-                <h2 className="font-serif font-light text-ivory leading-tight" style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}>{crystal.name}</h2>
-                <p className="font-sans text-sm text-ivory/50 leading-relaxed">{crystal.summary}</p>
+                <h2 className="font-serif font-light text-ivory leading-tight" style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}>{localized(crystal.name, locale)}</h2>
+                <p className="font-sans text-sm text-ivory/50 leading-relaxed">{localized(crystal.summary, locale)}</p>
                 <Link href={`/crystal-guide/${crystal.slug}`} className="inline-flex items-center gap-2 self-start font-sans text-sm text-gold hover:text-gold-light transition-colors duration-200 font-medium">
-                  {t("readFullGuide", { crystal: crystal.name })} <span>&rarr;</span>
+                  {t("readFullGuide", { crystal: localized(crystal.name, locale) })} <span>&rarr;</span>
                 </Link>
               </ScrollReveal>
             </div>
@@ -156,11 +164,11 @@ export default async function CollectionDetailPage({
               <StaggerReveal stagger={80}>
                 {otherCollections.map((other) => (
                   <Link key={other.slug} href={`/collections/${other.slug}`} className="group relative overflow-hidden rounded-xl shadow-card hover:shadow-hover transition-shadow duration-400 block" style={{ aspectRatio: "3/2" }}>
-                    <Image src={other.heroImage} alt={`${other.name} collection`} fill className="object-cover object-center transition-transform duration-600 ease-luxury group-hover:scale-105" sizes="(max-width: 640px) 100vw, 33vw" />
+                    <Image src={other.heroImage} alt={`${localized(other.name, locale)} collection`} fill className="object-cover object-center transition-transform duration-600 ease-luxury group-hover:scale-105" sizes="(max-width: 640px) 100vw, 33vw" />
                     <div className="absolute inset-0 bg-gradient-to-t from-brown/70 via-transparent to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-gold/70 mb-1">{other.stoneName}</p>
-                      <p className="font-serif font-light text-ivory text-base">{other.name}</p>
+                      <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-gold/70 mb-1">{localized(other.stoneName, locale)}</p>
+                      <p className="font-serif font-light text-ivory text-base">{localized(other.name, locale)}</p>
                     </div>
                   </Link>
                 ))}

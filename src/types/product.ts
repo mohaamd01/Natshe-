@@ -1,3 +1,5 @@
+import type { LocalizedText } from "@/lib/localize";
+
 export type ProductCategory =
   | "crystal-bracelets"
   | "crystal-necklaces"
@@ -24,25 +26,26 @@ export interface ProductImage {
 
 export interface Product {
   id: string;
+  /** URL slug — never localised */
   slug: string;
-  name: string;
-  shortDescription: string;
-  description: string;
+  name: string | LocalizedText;
+  shortDescription: string | LocalizedText;
+  description: string | LocalizedText;
   price: number;
   category: ProductCategory;
   stone: StoneType;
-  stoneName: string;
+  stoneName: string | LocalizedText;
   images: ProductImage[];
   /** What's included in the product */
-  includes: string[];
+  includes: (string | LocalizedText)[];
   /** Crystal energy properties */
   properties: {
-    energy: string;
-    chakra: string;
-    idealFor: string;
-    material: string;
+    energy: string | LocalizedText;
+    chakra: string | LocalizedText;
+    idealFor: string | LocalizedText;
+    material: string | LocalizedText;
   };
-  careInstructions: string[];
+  careInstructions: (string | LocalizedText)[];
   tags: string[];
   isBestSeller?: boolean;
   isNewArrival?: boolean;
@@ -61,11 +64,11 @@ export interface Category {
 
 export interface Collection {
   slug: string;
-  name: string;
-  tagline: string;
-  description: string;
+  name: string | LocalizedText;
+  tagline: string | LocalizedText;
+  description: string | LocalizedText;
   stone: StoneType;
-  stoneName: string;
+  stoneName: string | LocalizedText;
   heroImage: string;
   productIds: string[];
 }

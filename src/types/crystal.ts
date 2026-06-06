@@ -1,4 +1,5 @@
 import type { StoneType } from "./product";
+import type { LocalizedText } from "@/lib/localize";
 
 export interface CrystalProperty {
   icon: string;
@@ -9,28 +10,31 @@ export interface CrystalProperty {
 export interface Crystal {
   slug: string;
   stoneType: StoneType;
-  name: string;
-  subtitle: string;
+  /** Localised display name (e.g. "Tiger's Eye" / "Kaplan Gözü") */
+  name: string | LocalizedText;
+  /** Localised one-line subtitle */
+  subtitle: string | LocalizedText;
   /** One-paragraph hook for card previews */
-  summary: string;
+  summary: string | LocalizedText;
   /** Full editorial description for the guide page */
-  description: string;
+  description: string | LocalizedText;
   /** Pull quote for hero / storytelling */
-  pullQuote: string;
+  pullQuote: string | LocalizedText;
   image: string;
   /** Thumbnail for stone cards */
   thumbnail: string;
   color: string;
   properties: {
-    energy: string;
-    chakra: string;
-    zodiac: string;
-    element: string;
-    idealFor: string;
+    energy: string | LocalizedText;
+    chakra: string | LocalizedText;
+    zodiac: string | LocalizedText;
+    element: string | LocalizedText;
+    idealFor: string | LocalizedText;
+    /** Geographic origin — factual, stays in English */
     origin: string;
   };
-  benefits: string[];
-  careInstructions: string[];
+  benefits: (string | LocalizedText)[];
+  careInstructions: (string | LocalizedText)[];
   pairsWith: StoneType[];
   accentColor: string;
 }

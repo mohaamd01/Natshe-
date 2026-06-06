@@ -1,51 +1,59 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { localized } from "@/lib/localize";
+import type { LocalizedText } from "@/lib/localize";
 
 interface ProductCareAccordionProps {
-  careInstructions: string[];
+  careInstructions: (string | LocalizedText)[];
 }
 
-const SECTIONS = [
-  {
-    id: "care",
-    title: "Care Instructions",
-    icon: "◇",
-  },
-  {
-    id: "shipping",
-    title: "Shipping & Delivery",
-    icon: "◎",
-    content: [
-      "Ships to Saudi Arabia, UAE & Qatar",
-      "Estimated delivery: 7–14 business days",
-      "Free shipping on orders above $50",
-      "Tracked & insured shipping on all orders",
-      "Order via WhatsApp — we'll confirm details within a few hours",
-    ],
-  },
-  {
-    id: "returns",
-    title: "Returns & Exchanges",
-    icon: "♡",
-    content: [
-      "We want you to love your piece",
-      "Contact us via WhatsApp within 7 days of delivery",
-      "Items must be unworn and in original packaging",
-      "Exchange or store credit offered — no questions asked",
-    ],
-  },
-] as const;
-
 export default function ProductCareAccordion({ careInstructions }: ProductCareAccordionProps) {
+  const locale = useLocale();
+  const t = useTranslations("product");
   const [openId, setOpenId] = useState<string | null>("care");
 
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id));
 
+  const SECTIONS = [
+    {
+      id: "care",
+      title: t("careTitle"),
+      icon: "◇",
+    },
+    {
+      id: "shipping",
+      title: t("shippingTitle"),
+      icon: "◎",
+      content: [
+        t("shippingItem1"),
+        t("shippingItem2"),
+        t("shippingItem3"),
+        t("shippingItem4"),
+        t("shippingItem5"),
+      ],
+    },
+    {
+      id: "returns",
+      title: t("returnsTitle"),
+      icon: "♡",
+      content: [
+        t("returnsItem1"),
+        t("returnsItem2"),
+        t("returnsItem3"),
+        t("returnsItem4"),
+      ],
+    },
+  ] as const;
+
   return (
     <div className="divide-y divide-brown/10 border-t border-brown/10">
       {SECTIONS.map((section) => {
-        const items = section.id === "care" ? careInstructions : section.content;
+        const items: readonly string[] =
+          section.id === "care"
+            ? careInstructions.map((item) => localized(item, locale))
+            : section.content;
         const isOpen = openId === section.id;
 
         return (

@@ -4,27 +4,28 @@ import { getTranslations } from "next-intl/server";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
-// Tiger's Eye is the Stone of the Month for launch.
-// Stone content (name, tagline, quotes, properties) is product data — kept in English.
-const STONE = {
-  name: "Tiger's Eye",
-  subtitle: "Stone of the Month — June 2026",
-  tagline: "The Stone of Strength & Clarity",
-  pullQuote: "Wear it when the world asks you to be smaller than you are.",
-  summary:
-    "Tiger's Eye carries the energy of the earth and the warmth of the sun. Its golden-brown bands shift with a living light called chatoyancy — a visual reminder that strength and clarity are always within you. This month, we're celebrating the stone that moves people forward.",
-  properties: [
-    { label: "Energy", value: "Strength, Courage, Clarity" },
-    { label: "Chakra", value: "Solar Plexus & Root" },
-    { label: "Ideal For", value: "Confidence & Focus" },
-    { label: "Element", value: "Earth & Fire" },
-  ],
+const STONE_META = {
   image: "/images/products/set-tigers-eye-diamond-2.jpg",
   guideHref: "/crystal-guide/tigers-eye",
 };
 
 export default async function StoneOfMonth() {
   const t = await getTranslations("stoneOfMonth");
+
+  const STONE = {
+    name: t("stoneName"),
+    tagline: t("stoneTagline"),
+    pullQuote: t("stonePullQuote"),
+    summary: t("stoneSummary"),
+    properties: [
+      { label: t("propEnergyLabel"), value: t("propEnergyValue") },
+      { label: t("propChakraLabel"), value: t("propChakraValue") },
+      { label: t("propIdealLabel"), value: t("propIdealValue") },
+      { label: t("propElementLabel"), value: t("propElementValue") },
+    ],
+    image: STONE_META.image,
+    guideHref: STONE_META.guideHref,
+  };
 
   return (
     <section

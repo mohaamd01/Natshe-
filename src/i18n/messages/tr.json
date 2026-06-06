@@ -138,14 +138,28 @@
     "bestSeller": "Çok Satan",
     "newArrival": "Yeni Gelenler",
     "viewAll": "Tüm Ürünleri Gör",
-    "orderWhatsApp": "WhatsApp'tan Sipariş Ver"
+    "orderWhatsApp": "WhatsApp'tan Sipariş Ver",
+    "waMessage": "Merhaba! Aura Stor'dan sipariş vermek istiyorum. Doğru parçayı bulmama yardımcı olabilir misiniz?",
+    "helpChoosing": "WhatsApp'ta Seçim Yardımı Alın"
   },
   "stoneOfMonth": {
     "label": "Ayın Taşı",
     "propertiesLabel": "Kristal Özellikleri",
     "viewGuide": "Kristal Rehberini Oku",
     "shopStone": "{stone} Takılarını İncele",
-    "waMessage": "Merhaba! Aura Stor'da {stone} takısıyla ilgileniyorum. Bir parça seçmeme yardımcı olabilir misiniz?"
+    "waMessage": "Merhaba! Aura Stor'da {stone} takısıyla ilgileniyorum. Bir parça seçmeme yardımcı olabilir misiniz?",
+    "stoneName": "Kaplan Gözü",
+    "stoneTagline": "Güç ve Netlik Taşı",
+    "stonePullQuote": "Dünya senden daha küçük olmanı istediğinde tak.",
+    "stoneSummary": "Kaplan Gözü, toprağın enerjisini ve güneşin sıcaklığını bünyesinde taşır. Altın-kahverengi bantları, chatoyancy adı verilen yaşayan bir ışıkla kayar — güç ve netliğin her zaman içinizde olduğunu hatırlatan görsel bir mesaj. Bu ay, insanları ileriye taşıyan taşı kutluyoruz.",
+    "propEnergyLabel": "Enerji",
+    "propEnergyValue": "Güç, Cesaret, Netlik",
+    "propChakraLabel": "Çakra",
+    "propChakraValue": "Güneş Sinir Ağı ve Kök",
+    "propIdealLabel": "İdeal Kullanım",
+    "propIdealValue": "Özgüven ve Odak",
+    "propElementLabel": "Element",
+    "propElementValue": "Toprak ve Ateş"
   },
   "crystalGuideTeaser": {
     "label": "Bilgi",
@@ -218,10 +232,33 @@
       "crystal-rings": "Kristal Yüzükler",
       "crystal-sets": "Kristal Setler",
       "gift-sets": "Hediye Setleri"
-    }
+    },
+    "view": "Gör",
+    "relatedLabel": "İlgili Ürünler",
+    "relatedTitle": "Beğenebileceğiniz Diğerleri",
+    "cardWaMessage": "Merhaba! Aura Stor'dan \"{product}\" ürünüyle ilgileniyorum. Mevcut mu?"
   },
   "product": {
-    "waMessage": "Merhaba! Aura Stor'dan \"{product}\" ürününü sipariş etmek istiyorum. Mevcut mu? Gösterilen fiyat: {price}"
+    "waMessage": "Merhaba! Aura Stor'dan \"{product}\" ürününü sipariş etmek istiyorum. Mevcut mu? Gösterilen fiyat: {price}",
+    "crystalProperties": "Kristal Özellikleri",
+    "whatsIncluded": "Pakette Neler Var?",
+    "naturalStoneDisclaimer": "Her {stoneName} taşı eşsizdir — renk, desen ve doku doğal olarak farklılık gösterir. Parçanız benzersizdir.",
+    "careTitle": "Bakım Talimatları",
+    "shippingTitle": "Kargo ve Teslimat",
+    "shippingItem1": "Suudi Arabistan, BAE ve Katar'a kargo",
+    "shippingItem2": "Tahmini teslimat: 7–14 iş günü",
+    "shippingItem3": "50 dolar üzeri siparişlerde ücretsiz kargo",
+    "shippingItem4": "Tüm siparişlerde takipli ve sigortalı kargo",
+    "shippingItem5": "WhatsApp'tan sipariş verin — birkaç saat içinde detayları onaylıyoruz",
+    "returnsTitle": "İadeler ve Değişimler",
+    "returnsItem1": "Parçanızı sevmenizi istiyoruz",
+    "returnsItem2": "Teslimat tarihinden itibaren 7 gün içinde WhatsApp'tan bize ulaşın",
+    "returnsItem3": "Ürünler kullanılmamış ve orijinal ambalajında olmalıdır",
+    "returnsItem4": "Değişim veya mağaza kredisi — soru sorulmadan",
+    "energyLabel": "Enerji",
+    "chakraLabel": "Çakra",
+    "idealForLabel": "İdeal Kullanım",
+    "materialLabel": "Malzeme"
   },
   "collections": {
     "title": "Kristal Takı Koleksiyonları",

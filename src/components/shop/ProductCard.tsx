@@ -1,7 +1,11 @@
-﻿import { Link } from "@/i18n/navigation";
+"use client";
+
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { formatPrice } from "@/lib/utils";
+import { localized } from "@/lib/localize";
+import { useLocale, useTranslations } from "next-intl";
 import type { Product } from "@/types/product";
 
 interface ProductCardProps {
@@ -21,8 +25,15 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export default function ProductCard({ product, tall = true, priority = false }: ProductCardProps) {
+  const locale = useLocale();
+  const t = useTranslations("shop");
+
+  const name = localized(product.name, locale);
+  const stoneName = localized(product.stoneName, locale);
+  const shortDescription = localized(product.shortDescription, locale);
+
   const heroImage = product.images[0];
-  const waMessage = `Hello! I'm interested in the "${product.name}" from Aura Stor. Is it available? I'd like to place an order.`;
+  const waMessage = t("cardWaMessage", { product: name });
 
   return (
     <article className="group flex flex-col">
@@ -49,19 +60,19 @@ export default function ProductCard({ product, tall = true, priority = false }: 
         <Link
           href={`/shop/${product.slug}`}
           className="absolute inset-0 z-10"
-          aria-label={`View ${product.name}`}
+          aria-label={`${t("view")} ${name}`}
         />
 
         {/* Badges — pointer-events-none so they don't block the link */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5 pointer-events-none z-20">
           {product.isBestSeller && (
             <span className="bg-gold text-brown text-[10px] font-sans font-semibold tracking-wide px-2.5 py-1 rounded-full">
-              Best Seller
+              {t("bestSeller")}
             </span>
           )}
           {product.isNewArrival && (
             <span className="bg-sage text-ivory text-[10px] font-sans font-semibold tracking-wide px-2.5 py-1 rounded-full">
-              New
+              {t("newArrival")}
             </span>
           )}
         </div>
@@ -75,7 +86,7 @@ export default function ProductCard({ product, tall = true, priority = false }: 
             className="flex items-center justify-center gap-2 w-full bg-whatsapp text-white text-xs font-sans font-semibold py-2.5 rounded-xl shadow-whatsapp"
           >
             <WhatsAppIcon className="w-3.5 h-3.5" />
-            Order via WhatsApp
+            {t("orderWhatsApp")}
           </a>
         </div>
       </div>
@@ -83,15 +94,15 @@ export default function ProductCard({ product, tall = true, priority = false }: 
       {/* Info */}
       <div className="mt-3 flex flex-col gap-1 flex-1">
         <p className="font-sans text-[10px] tracking-[0.15em] uppercase text-brown/40">
-          {product.stoneName}
+          {stoneName}
         </p>
         <Link href={`/shop/${product.slug}`} className="hover:text-sage transition-colors duration-200">
           <h3 className="font-serif text-base md:text-lg text-brown font-light leading-snug">
-            {product.name}
+            {name}
           </h3>
         </Link>
         <p className="font-sans text-xs text-brown/50 leading-snug line-clamp-2 mt-0.5">
-          {product.shortDescription}
+          {shortDescription}
         </p>
         <div className="flex items-center justify-between mt-auto pt-2">
           <span className="font-serif text-lg text-sage font-medium">
@@ -101,7 +112,7 @@ export default function ProductCard({ product, tall = true, priority = false }: 
             href={`/shop/${product.slug}`}
             className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200"
           >
-            View &rarr;
+            {t("view")} &rarr;
           </Link>
         </div>
       </div>

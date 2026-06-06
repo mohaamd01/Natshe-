@@ -138,14 +138,28 @@
     "bestSeller": "Best Seller",
     "newArrival": "New Arrival",
     "viewAll": "View All Products",
-    "orderWhatsApp": "Order via WhatsApp"
+    "orderWhatsApp": "Order via WhatsApp",
+    "waMessage": "Hello! I'd like to order from Aura Stor. Can you help me choose the right piece?",
+    "helpChoosing": "Get help choosing via WhatsApp"
   },
   "stoneOfMonth": {
     "label": "Stone of the Month",
     "propertiesLabel": "Crystal Properties",
     "viewGuide": "Read Full Crystal Guide",
     "shopStone": "Shop {stone} Jewelry",
-    "waMessage": "Hello! I'm interested in {stone} jewelry from Aura Stor. Can you help me choose a piece?"
+    "waMessage": "Hello! I'm interested in {stone} jewelry from Aura Stor. Can you help me choose a piece?",
+    "stoneName": "Tiger's Eye",
+    "stoneTagline": "The Stone of Strength & Clarity",
+    "stonePullQuote": "Wear it when the world asks you to be smaller than you are.",
+    "stoneSummary": "Tiger's Eye carries the energy of the earth and the warmth of the sun. Its golden-brown bands shift with a living light called chatoyancy — a visual reminder that strength and clarity are always within you. This month, we're celebrating the stone that moves people forward.",
+    "propEnergyLabel": "Energy",
+    "propEnergyValue": "Strength, Courage, Clarity",
+    "propChakraLabel": "Chakra",
+    "propChakraValue": "Solar Plexus & Root",
+    "propIdealLabel": "Ideal For",
+    "propIdealValue": "Confidence & Focus",
+    "propElementLabel": "Element",
+    "propElementValue": "Earth & Fire"
   },
   "crystalGuideTeaser": {
     "label": "Knowledge",
@@ -218,10 +232,33 @@
       "crystal-rings": "Crystal Rings",
       "crystal-sets": "Crystal Sets",
       "gift-sets": "Gift Sets"
-    }
+    },
+    "view": "View",
+    "relatedLabel": "Related",
+    "relatedTitle": "You May Also Love",
+    "cardWaMessage": "Hello! I'm interested in the \"{product}\" from Aura Stor. Is it available?"
   },
   "product": {
-    "waMessage": "Hello! I'd like to order the \"{product}\" from Aura Stor. Is it available? Price shown: {price}"
+    "waMessage": "Hello! I'd like to order the \"{product}\" from Aura Stor. Is it available? Price shown: {price}",
+    "crystalProperties": "Crystal Properties",
+    "whatsIncluded": "What's Included",
+    "naturalStoneDisclaimer": "Each {stoneName} stone is unique — colour, patterning, and texture vary naturally. Your piece is one of a kind.",
+    "careTitle": "Care Instructions",
+    "shippingTitle": "Shipping & Delivery",
+    "shippingItem1": "Ships to Saudi Arabia, UAE & Qatar",
+    "shippingItem2": "Estimated delivery: 7–14 business days",
+    "shippingItem3": "Free shipping on orders above $50",
+    "shippingItem4": "Tracked & insured shipping on all orders",
+    "shippingItem5": "Order via WhatsApp — we'll confirm details within a few hours",
+    "returnsTitle": "Returns & Exchanges",
+    "returnsItem1": "We want you to love your piece",
+    "returnsItem2": "Contact us via WhatsApp within 7 days of delivery",
+    "returnsItem3": "Items must be unworn and in original packaging",
+    "returnsItem4": "Exchange or store credit offered — no questions asked",
+    "energyLabel": "Energy",
+    "chakraLabel": "Chakra",
+    "idealForLabel": "Ideal For",
+    "materialLabel": "Material"
   },
   "collections": {
     "title": "Crystal Jewelry Collections",
