@@ -28,6 +28,16 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
 
+  // Translate top-level nav labels by href so navItems data stays locale-agnostic
+  const NAV_LABEL: Record<string, string> = {
+    "/shop": t("shop"),
+    "/collections": t("collections"),
+    "/crystal-guide": t("crystalGuide"),
+    "/gift-sets": t("giftSets"),
+    "/about": t("about"),
+    "/contact": t("contact"),
+  };
+
   const QUICK_LINKS = [
     { label: t("shop"), href: "/shop" },
     { label: t("collections"), href: "/collections" },
@@ -136,7 +146,7 @@ export default function Header() {
                     )}
                   >
                     <span className="flex items-center gap-1">
-                      {item.label}
+                      {NAV_LABEL[item.href] ?? item.label}
                       {item.children && (
                         <svg
                           className="w-2.5 h-2.5 mt-px opacity-50"

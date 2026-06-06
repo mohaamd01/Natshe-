@@ -19,6 +19,16 @@ interface MobileMenuProps {
 export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   const t = useTranslations("nav");
   const locale = useLocale();
+
+  // Translate top-level nav labels by href so navItems data stays locale-agnostic
+  const NAV_LABEL: Record<string, string> = {
+    "/shop": t("shop"),
+    "/collections": t("collections"),
+    "/crystal-guide": t("crystalGuide"),
+    "/gift-sets": t("giftSets"),
+    "/about": t("about"),
+    "/contact": t("contact"),
+  };
   const pathname = usePathname();
   const router = useRouter();
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
@@ -116,7 +126,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                     }
                     aria-expanded={expandedItem === item.label}
                   >
-                    {item.label}
+                    {NAV_LABEL[item.href] ?? item.label}
                     <svg
                       className={cn(
                         "w-4 h-4 transition-transform duration-300 text-sage",
@@ -160,7 +170,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                   className="flex items-center px-6 py-4 font-sans font-medium text-base text-brown hover:text-sage transition-colors duration-200"
                   onClick={onClose}
                 >
-                  {item.label}
+                  {NAV_LABEL[item.href] ?? item.label}
                 </Link>
               )}
             </div>

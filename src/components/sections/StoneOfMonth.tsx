@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
-// Tiger's Eye is the Stone of the Month for launch
+// Tiger's Eye is the Stone of the Month for launch.
+// Stone content (name, tagline, quotes, properties) is product data — kept in English.
 const STONE = {
   name: "Tiger's Eye",
   subtitle: "Stone of the Month — June 2026",
@@ -18,13 +20,11 @@ const STONE = {
     { label: "Element", value: "Earth & Fire" },
   ],
   image: "/images/products/set-tigers-eye-diamond-2.jpg",
-  accent: "#C9A050",
   guideHref: "/crystal-guide/tigers-eye",
-  shopHref: "/shop?filter=tigers-eye",
 };
 
-export default function StoneOfMonth() {
-  const waMessage = `Hello! I'm interested in Tiger's Eye jewelry from Aura Stor — the Stone of the Month. Can you help me choose a piece?`;
+export default async function StoneOfMonth() {
+  const t = await getTranslations("stoneOfMonth");
 
   return (
     <section
@@ -32,7 +32,6 @@ export default function StoneOfMonth() {
       style={{ backgroundColor: "#2D1F14" }}
       aria-labelledby="stone-of-month-heading"
     >
-      {/* Background texture */}
       <div className="absolute inset-0 opacity-5">
         <div
           className="absolute inset-0"
@@ -45,12 +44,11 @@ export default function StoneOfMonth() {
       </div>
 
       <div className="container-luxury relative z-10">
-        {/* Section label */}
         <ScrollReveal className="text-center mb-12">
           <div className="inline-flex items-center gap-3 px-5 py-2 border border-gold/30 rounded-full mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" aria-hidden="true" />
             <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold">
-              {STONE.subtitle}
+              {t("label")}
             </span>
           </div>
         </ScrollReveal>
@@ -67,11 +65,8 @@ export default function StoneOfMonth() {
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 80vw, 45vw"
                 />
-                {/* Warm overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2D1F14]/60 via-transparent to-transparent" />
               </div>
-
-              {/* Month badge */}
               <div
                 className="absolute -top-4 -right-4 w-20 h-20 rounded-full flex flex-col items-center justify-center text-center border border-gold/40"
                 style={{ background: "radial-gradient(circle, #3D2B1F 60%, #2D1F14 100%)" }}
@@ -98,10 +93,9 @@ export default function StoneOfMonth() {
                 </h2>
               </div>
 
-              {/* Pull quote */}
               <blockquote className="border-l-2 border-gold pl-5">
                 <p className="font-serif italic text-lg md:text-xl text-ivory/80 leading-snug">
-                  "{STONE.pullQuote}"
+                  &ldquo;{STONE.pullQuote}&rdquo;
                 </p>
               </blockquote>
 
@@ -111,6 +105,9 @@ export default function StoneOfMonth() {
 
               {/* Properties grid */}
               <div className="grid grid-cols-2 gap-4 py-4 border-t border-ivory/10">
+                <p className="col-span-2 font-sans text-[10px] tracking-[0.2em] uppercase text-gold/50 -mb-2">
+                  {t("propertiesLabel")}
+                </p>
                 {STONE.properties.map((prop) => (
                   <div key={prop.label}>
                     <p className="font-sans text-[10px] tracking-[0.15em] uppercase text-gold/60 mb-1">
@@ -121,22 +118,23 @@ export default function StoneOfMonth() {
                 ))}
               </div>
 
-              {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <a
-                  href={buildWhatsAppUrl(waMessage)}
+                  href={buildWhatsAppUrl(
+                    t("waMessage", { stone: STONE.name })
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-whatsapp text-white text-sm font-sans font-semibold rounded-full shadow-whatsapp hover:opacity-90 transition-opacity duration-200"
                 >
                   <WhatsAppIcon className="w-4 h-4" />
-                  Shop Tiger's Eye
+                  {t("shopStone", { stone: STONE.name })}
                 </a>
                 <Link
                   href={STONE.guideHref}
                   className="inline-flex items-center justify-center px-6 py-3 border border-ivory/20 text-ivory text-sm font-sans font-medium rounded-full hover:bg-ivory/10 transition-colors duration-200"
                 >
-                  Learn about this stone
+                  {t("viewGuide")}
                 </Link>
               </div>
             </div>

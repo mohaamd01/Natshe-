@@ -1,72 +1,66 @@
+import { getTranslations } from "next-intl/server";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { CONTACT } from "@/lib/constants";
 
-const CTA_MESSAGE =
-  "Hello! I'd like to place an order with Aura Stor. Can you help me find the right piece?";
+export default async function WhatsAppCTA() {
+  const t = await getTranslations("whatsappCTA");
 
-const STEPS = [
-  {
-    number: "01",
-    title: "Browse & Choose",
-    description: "Explore our collection and find the stone that speaks to you.",
-  },
-  {
-    number: "02",
-    title: "Message Us",
-    description: "Tap any WhatsApp button and tell us which piece you love.",
-  },
-  {
-    number: "03",
-    title: "We Confirm & Ship",
-    description: "We confirm availability and ship your order in beautiful packaging.",
-  },
-];
+  const STEPS = [
+    {
+      number: t("step1Number"),
+      title: t("step1Title"),
+      description: t("step1Desc"),
+    },
+    {
+      number: t("step2Number"),
+      title: t("step2Title"),
+      description: t("step2Desc"),
+    },
+    {
+      number: t("step3Number"),
+      title: t("step3Title"),
+      description: t("step3Desc"),
+    },
+  ];
 
-export default function WhatsAppCTA() {
   return (
     <section
       className="section-padding relative overflow-hidden"
       style={{ backgroundColor: "#3A5240" }}
       aria-labelledby="whatsapp-cta-heading"
     >
-      {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-64 h-64 rounded-full opacity-10"
         style={{ background: "radial-gradient(circle, #C9A050 0%, transparent 70%)", transform: "translate(-30%, -30%)" }} />
       <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full opacity-10"
         style={{ background: "radial-gradient(circle, #C9A050 0%, transparent 70%)", transform: "translate(30%, 30%)" }} />
 
       <div className="container-luxury relative z-10">
-        {/* Header */}
         <ScrollReveal className="text-center mb-14">
           <p className="font-sans text-xs tracking-[0.3em] uppercase text-gold/70 mb-4">
-            How to Order
+            {t("label")}
           </p>
           <h2
             id="whatsapp-cta-heading"
             className="font-serif font-light text-ivory leading-tight"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
           >
-            Order Directly via WhatsApp.
+            {t("title")}
             <br />
-            <em className="text-gold/80">Personally. Instantly.</em>
+            <em className="text-gold/80">{t("titleItalic")}</em>
           </h2>
           <p className="font-sans text-sm text-ivory/60 mt-4 max-w-md mx-auto leading-relaxed">
-            No checkout forms. No accounts. Just a conversation with our team —
-            and your piece, beautifully packed and on its way.
+            {t("subtitle")}
           </p>
         </ScrollReveal>
 
-        {/* 3-step process */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-14">
           {STEPS.map((step, i) => (
             <ScrollReveal key={step.number} delay={i * 100}>
               <div className="flex flex-col items-center text-center md:items-start md:text-left">
-                {/* Number */}
                 <span className="font-serif text-5xl font-light text-gold/30 leading-none mb-4">
                   {step.number}
                 </span>
-                {/* Connector line on desktop */}
                 <div className="hidden md:block absolute right-0 top-8 w-full h-px bg-gold/20" />
                 <h3 className="font-sans text-sm font-semibold tracking-wide text-ivory mb-2">
                   {step.title}
@@ -79,39 +73,37 @@ export default function WhatsAppCTA() {
           ))}
         </div>
 
-        {/* Main CTA */}
         <ScrollReveal className="flex flex-col items-center gap-4">
           <a
-            href={buildWhatsAppUrl(CTA_MESSAGE)}
+            href={buildWhatsAppUrl(t("waMessage"))}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-whatsapp text-white font-sans font-semibold text-base px-10 py-4 rounded-full shadow-whatsapp hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-300"
-            aria-label="Order via WhatsApp"
+            aria-label={t("cta")}
           >
             <WhatsAppIcon className="w-5 h-5" />
-            Start Your Order on WhatsApp
+            {t("cta")}
           </a>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 text-ivory/40 text-xs font-sans">
             <span className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-whatsapp animate-pulse" aria-hidden="true" />
-              Available {CONTACT.businessDays}
+              {t("available", { days: CONTACT.businessDays })}
             </span>
             <span className="hidden sm:block opacity-50">&middot;</span>
-            <span>{CONTACT.businessHours}</span>
+            <span>{t("hours", { hours: CONTACT.businessHours })}</span>
             <span className="hidden sm:block opacity-50">&middot;</span>
-            <span>Response: {CONTACT.responseTime}</span>
+            <span>{t("response", { time: CONTACT.responseTime })}</span>
           </div>
         </ScrollReveal>
 
-        {/* Shipping assurance */}
         <ScrollReveal delay={150} className="mt-12 pt-12 border-t border-ivory/10">
           <div className="flex flex-wrap justify-center gap-x-10 gap-y-4">
             {[
-              "Free shipping on orders above $50",
-              "Ships to Saudi Arabia, UAE & Qatar",
-              "Velvet gift packaging included",
-              "14-day return policy",
+              t("assurance1"),
+              t("assurance2"),
+              t("assurance3"),
+              t("assurance4"),
             ].map((item) => (
               <div key={item} className="flex items-center gap-2 text-ivory/50">
                 <CheckIcon className="w-3.5 h-3.5 text-gold/70 flex-shrink-0" />

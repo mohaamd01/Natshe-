@@ -1,10 +1,11 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { ScrollReveal, StaggerReveal } from "@/components/ui/ScrollReveal";
 import { SOCIAL } from "@/lib/constants";
 
-// Using product images as Instagram-style feed placeholders.
-// In Sprint 8 / Phase 2, replace with Behold.so embed or Instagram Basic Display API.
+// Product images used as Instagram-style feed placeholders.
+// Image captions are brand copy — kept in English as content data.
 const FEED_IMAGES = [
   {
     src: "/images/products/ring-jade-hand.jpg",
@@ -38,11 +39,12 @@ const FEED_IMAGES = [
   },
 ];
 
-export default function InstagramFeed() {
+export default async function InstagramFeed() {
+  const t = await getTranslations("instagramFeed");
+
   return (
     <section className="section-padding bg-ivory" aria-labelledby="instagram-heading">
       <div className="container-luxury">
-        {/* Header */}
         <ScrollReveal className="text-center mb-10">
           <a
             href={SOCIAL.instagram}
@@ -56,54 +58,52 @@ export default function InstagramFeed() {
               id="instagram-heading"
               className="font-sans text-xs tracking-[0.25em] uppercase text-brown/50 group-hover:text-sage transition-colors duration-200"
             >
-              {SOCIAL.instagramHandle}
+              {t("handle")}
             </span>
           </a>
 
-          <h2 className="font-serif font-light text-brown mt-3 leading-tight"
+          <h2
+            className="font-serif font-light text-brown mt-3 leading-tight"
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}
           >
-            Follow Our World
+            {t("title")}
           </h2>
           <p className="font-sans text-sm text-brown/50 mt-2 max-w-sm mx-auto">
-            Behind the stones. Behind the brand. Every day on Instagram.
+            {t("label")}
           </p>
         </ScrollReveal>
 
-        {/* Feed grid */}
         <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
-        <StaggerReveal stagger={60}>
-          {FEED_IMAGES.map((item, i) => (
-            <a
-              key={i}
-              href={SOCIAL.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative aspect-square rounded-lg overflow-hidden bg-ivory-dark block"
-              aria-label={`Instagram post: ${item.caption}`}
-            >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                className="object-cover object-center transition-transform duration-500 ease-luxury group-hover:scale-110"
-                sizes="(max-width: 768px) 33vw, 16vw"
-              />
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-brown/0 group-hover:bg-brown/50 transition-colors duration-300 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center px-2">
-                  <InstagramIcon className="w-5 h-5 text-white mx-auto mb-1.5" />
-                  <p className="font-sans text-[9px] text-ivory/90 leading-snug line-clamp-2">
-                    {item.caption}
-                  </p>
+          <StaggerReveal stagger={60}>
+            {FEED_IMAGES.map((item, i) => (
+              <a
+                key={i}
+                href={SOCIAL.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative aspect-square rounded-lg overflow-hidden bg-ivory-dark block"
+                aria-label={`Instagram post: ${item.caption}`}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  className="object-cover object-center transition-transform duration-500 ease-luxury group-hover:scale-110"
+                  sizes="(max-width: 768px) 33vw, 16vw"
+                />
+                <div className="absolute inset-0 bg-brown/0 group-hover:bg-brown/50 transition-colors duration-300 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center px-2">
+                    <InstagramIcon className="w-5 h-5 text-white mx-auto mb-1.5" />
+                    <p className="font-sans text-[9px] text-ivory/90 leading-snug line-clamp-2">
+                      {item.caption}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))}
-        </StaggerReveal>
+              </a>
+            ))}
+          </StaggerReveal>
         </div>
 
-        {/* Follow CTA */}
         <ScrollReveal delay={200} className="text-center mt-8">
           <a
             href={SOCIAL.instagram}
@@ -112,7 +112,7 @@ export default function InstagramFeed() {
             className="inline-flex items-center gap-2.5 px-7 py-3 border border-brown/20 text-brown text-sm font-sans font-medium rounded-full hover:bg-brown hover:text-ivory hover:border-brown transition-all duration-300"
           >
             <InstagramIcon className="w-4 h-4" />
-            Follow on Instagram
+            {t("follow")}
           </a>
         </ScrollReveal>
       </div>

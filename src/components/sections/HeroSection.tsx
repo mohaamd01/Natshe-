@@ -1,12 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { SITE_CONFIG } from "@/lib/constants";
 
-const HERO_WA_MESSAGE =
-  "Hello! I found Aura Stor and I'd love to explore your crystal jewelry collection.";
+export default async function HeroSection() {
+  const t = await getTranslations("hero");
 
-export default function HeroSection() {
   return (
     <section
       className="relative min-h-screen flex items-end pb-16 md:pb-24 overflow-hidden"
@@ -23,11 +22,8 @@ export default function HeroSection() {
           style={{ objectPosition: "center top" }}
           sizes="100vw"
         />
-        {/* Subtle warm tint — just enough to unify the light photo background */}
         <div className="absolute inset-0 bg-brown/25" />
-        {/* Bottom-to-top gradient — dark at bottom for text legibility, fades to transparent */}
         <div className="absolute inset-0 bg-gradient-to-t from-brown/75 via-brown/15 to-transparent" />
-        {/* Left vignette — keeps headline legible without obscuring the model */}
         <div className="absolute inset-0 bg-gradient-to-r from-brown/40 via-brown/5 to-transparent" />
       </div>
 
@@ -36,24 +32,24 @@ export default function HeroSection() {
         <div className="max-w-xl">
           {/* Eyebrow label */}
           <p className="font-sans text-xs tracking-[0.3em] uppercase text-gold/90 mb-5 animate-fade-in">
-            Luxury Crystal Jewelry
+            {t("eyebrow")}
           </p>
 
           {/* Main headline */}
           <h1 className="font-serif font-light text-ivory leading-[1.1] mb-6"
             style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}
           >
-            {SITE_CONFIG.tagline}
+            {t("tagline")}
           </h1>
 
           {/* Brand promise */}
           <p className="font-sans font-light text-ivory/70 text-base md:text-lg leading-relaxed mb-3 max-w-sm">
-            {SITE_CONFIG.promise}
+            {t("promise")}
           </p>
 
           {/* Shipping note */}
           <p className="font-sans text-xs text-ivory/50 tracking-wider mb-10">
-            Shipping to Saudi Arabia, UAE &amp; Qatar
+            {t("shipping")}
           </p>
 
           {/* CTAs */}
@@ -62,16 +58,16 @@ export default function HeroSection() {
               href="/shop"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-gold text-brown text-sm font-sans font-semibold tracking-wide rounded-full hover:bg-gold/90 transition-all duration-300 shadow-gold hover:shadow-gold hover:-translate-y-0.5"
             >
-              Shop the Collection
+              {t("ctaShop")}
             </Link>
             <a
-              href={buildWhatsAppUrl(HERO_WA_MESSAGE)}
+              href={buildWhatsAppUrl(t("waMessage"))}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-ivory/40 text-ivory text-sm font-sans font-medium tracking-wide rounded-full hover:bg-ivory/10 transition-all duration-300"
             >
               <WhatsAppIcon className="w-4 h-4 text-whatsapp" />
-              Order via WhatsApp
+              {t("ctaWhatsApp")}
             </a>
           </div>
         </div>
@@ -79,7 +75,7 @@ export default function HeroSection() {
         {/* Scroll indicator */}
         <div className="absolute bottom-8 right-6 md:right-10 flex flex-col items-center gap-2 opacity-60">
           <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-ivory rotate-90 origin-center translate-x-4 mb-3">
-            Scroll
+            {t("scroll")}
           </span>
           <div className="w-px h-12 bg-gradient-to-b from-ivory/60 to-transparent animate-pulse" />
         </div>
@@ -87,9 +83,9 @@ export default function HeroSection() {
 
       {/* Floating product badges */}
       <div className="absolute top-1/2 right-6 md:right-12 -translate-y-1/2 z-10 hidden md:flex flex-col gap-3">
-        <HeroBadge label="Natural Stones" sub="100% Genuine" />
-        <HeroBadge label="Free Shipping" sub="Orders above $50" />
-        <HeroBadge label="WhatsApp Order" sub="Personal service" />
+        <HeroBadge label={t("badge1Label")} sub={t("badge1Sub")} />
+        <HeroBadge label={t("badge2Label")} sub={t("badge2Sub")} />
+        <HeroBadge label={t("badge3Label")} sub={t("badge3Sub")} />
       </div>
     </section>
   );

@@ -1,8 +1,10 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import SectionTitle from "@/components/ui/SectionTitle";
 
+// Category slugs / hrefs / images / labels are product data — kept in English.
 const categories = [
   {
     slug: "crystal-sets",
@@ -11,7 +13,6 @@ const categories = [
     href: "/shop/crystal-sets",
     image: "/images/products/set-aventurine-heart-2.jpg",
     imageAlt: "Aventurine Heart Crystal Set",
-    featured: true,
   },
   {
     slug: "crystal-rings",
@@ -20,7 +21,6 @@ const categories = [
     href: "/shop/crystal-rings",
     image: "/images/products/ring-jade-hand.jpg",
     imageAlt: "Jade Gold Claw Ring",
-    featured: true,
   },
   {
     slug: "crystal-bracelets",
@@ -29,7 +29,6 @@ const categories = [
     href: "/shop/crystal-bracelets",
     image: "/images/products/set-tigers-eye-diamond-1.jpg",
     imageAlt: "Tiger's Eye Crystal Bracelet",
-    featured: false,
   },
   {
     slug: "crystal-necklaces",
@@ -38,7 +37,6 @@ const categories = [
     href: "/shop/crystal-necklaces",
     image: "/images/products/necklace-tigers-eye-wirewrapped.jpg",
     imageAlt: "Tiger's Eye Wire-Wrapped Necklace",
-    featured: false,
   },
   {
     slug: "gift-sets",
@@ -47,51 +45,48 @@ const categories = [
     href: "/gift-sets",
     image: "/images/products/set-howlite-teardrop-2.jpg",
     imageAlt: "Howlite Teardrop Gift Set",
-    featured: false,
   },
 ];
 
-export default function CategoryGrid() {
+export default async function CategoryGrid() {
+  const t = await getTranslations("categories");
+
   return (
     <section className="section-padding bg-ivory" aria-labelledby="categories-heading">
       <div className="container-luxury">
         <ScrollReveal>
           <SectionTitle
-            label="Explore"
-            title="Shop by Category"
-            subtitle="Handcrafted from natural gemstones. Each piece is one-of-a-kind."
+            id="categories-heading"
+            label={t("label")}
+            title={t("title")}
+            subtitle={t("subtitle")}
             align="center"
             withDivider
           />
         </ScrollReveal>
 
-        {/* Bento-style grid — 2 large + 3 small */}
         <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
           {categories.slice(0, 2).map((cat, i) => (
             <ScrollReveal key={cat.slug} delay={i * 80}>
-              <CategoryCard cat={cat} tall />
+              <CategoryCard cat={cat} tall shopNow={t("shopNow")} />
             </ScrollReveal>
           ))}
-          {/* Three smaller cards stacked in a column */}
           <div className="col-span-2 md:col-span-1 grid grid-cols-1 gap-3 md:gap-4">
             {categories.slice(2).map((cat, i) => (
               <ScrollReveal key={cat.slug} delay={160 + i * 60}>
-                <CategoryCard cat={cat} />
+                <CategoryCard cat={cat} shopNow={t("shopNow")} />
               </ScrollReveal>
             ))}
           </div>
         </div>
 
-        {/* View all link */}
         <ScrollReveal delay={200} className="mt-10 text-center">
           <Link
             href="/shop"
             className="inline-flex items-center gap-2 font-sans text-sm font-medium text-sage hover:text-sage-dark tracking-wide group transition-colors duration-200"
           >
-            View All Products
-            <span className="group-hover:translate-x-1 transition-transform duration-200">
-              &rarr;
-            </span>
+            {t("viewAll")}
+            <span className="group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
           </Link>
         </ScrollReveal>
       </div>
@@ -102,9 +97,11 @@ export default function CategoryGrid() {
 function CategoryCard({
   cat,
   tall = false,
+  shopNow,
 }: {
   cat: (typeof categories)[0];
   tall?: boolean;
+  shopNow: string;
 }) {
   return (
     <Link
@@ -120,10 +117,7 @@ function CategoryCard({
         className="object-cover object-center transition-transform duration-700 ease-luxury group-hover:scale-105"
         sizes="(max-width: 768px) 50vw, 33vw"
       />
-      {/* Gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-brown/80 via-brown/20 to-transparent transition-opacity duration-300 group-hover:from-brown/70" />
-
-      {/* Label */}
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
         <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-gold/80 mb-1">
           {cat.description}
@@ -132,7 +126,7 @@ function CategoryCard({
           {cat.label}
         </h3>
         <span className="inline-flex items-center gap-1 mt-2 font-sans text-xs text-ivory/60 group-hover:text-gold transition-colors duration-200">
-          Shop now <span className="group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
+          {shopNow} <span className="group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
         </span>
       </div>
     </Link>
