@@ -8,7 +8,8 @@ import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { navItems } from "@/data/navigation";
 import { SOCIAL, SITE_CONFIG } from "@/lib/constants";
 import { useTranslations, useLocale } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { useRouter } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
 
 interface MobileMenuProps {
   open: boolean;
@@ -23,12 +24,16 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
   function switchLocale() {
-    const next = locale === "en" ? "tr" : "en";
-    // Strip any existing locale prefix that usePathname may include (e.g. "/tr" → "/")
-    // so router.replace doesn't double-prefix: /tr + locale:tr → /tr/tr
-    const cleanPath =
-      pathname.replace(/^\/(en|tr)(\/|$)/, "/").replace(/\/$/, "") || "/";
-    router.replace(cleanPath, { locale: next });
+    const targetLocale = locale === "en" ? "tr" : "en";
+    // Use window.location.pathname as ground truth — next-intl's usePathname
+    // can be unreliable with { locale } routing. Strip /en or /tr prefix,
+    // then build the full URL and push via the native Next.js router so no
+    // locale is automatically appended a second time.
+    const currentPath =
+      typeof window !== "undefined" ? window.location.pathname : `/${locale}`;
+    const pathWithoutLocale = currentPath.replace(/^\/(en|tr)(\/|$)/, "/") || "/";
+    const finalPath = `/${targetLocale}${pathWithoutLocale === "/" ? "" : pathWithoutLocale}`;
+    router.push(finalPath);
     onClose();
   }
 
