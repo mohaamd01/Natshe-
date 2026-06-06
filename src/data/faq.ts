@@ -117,6 +117,127 @@ export const faqs: FAQ[] = [
   },
 ];
 
+export const faqsTr: FAQ[] = [
+  // SİPARİŞ
+  {
+    id: "faq-ordering-1",
+    question: "Nasıl sipariş verebilirim?",
+    answer:
+      "Tüm siparişler doğrudan WhatsApp üzerinden verilir. Web sitemizdeki herhangi bir 'WhatsApp'tan Sipariş Ver' düğmesine dokunun; ekibimizle önceden yazılmış bir mesajla bağlantı kurulur. Stok durumunu onaylar, özelleştirme seçeneklerini konuşur ve ödemeyi ayarlarız — her şey kişisel olarak.",
+    category: "ordering",
+  },
+  {
+    id: "faq-ordering-2",
+    question: "Yanıt saatleriniz nelerdir?",
+    answer:
+      "WhatsApp ekibimiz her gün 09:00 – 22:00 (GMT+3) saatleri arasında hizmet vermektedir. Mesai saatlerinde genellikle birkaç saat içinde yanıt veriyoruz.",
+    category: "ordering",
+  },
+  {
+    id: "faq-ordering-3",
+    question: "Özel sipariş kabul ediyor musunuz?",
+    answer:
+      "Evet! Özel parçalar oluşturmayı çok seviyoruz. Belirli bir taş, şu an listelediğimiz dışında bir kombinasyon veya sevdiklerinize özel bir hediye seti istiyorsanız — WhatsApp üzerinden ulaşın, ekibimiz sizinle birlikte tasarlasın.",
+    category: "ordering",
+  },
+  {
+    id: "faq-ordering-4",
+    question: "Hangi ödeme yöntemlerini kabul ediyorsunuz?",
+    answer:
+      "Şu anda banka transferi ve mobil ödeme yöntemlerini kabul ediyoruz. WhatsApp üzerinden sipariş verdiğinizde ekibimiz ödeme detaylarını size iletir.",
+    category: "ordering",
+  },
+
+  // KARGO
+  {
+    id: "faq-shipping-1",
+    question: "Hangi ülkelere kargo gönderiyorsunuz?",
+    answer:
+      "Suudi Arabistan, Birleşik Arap Emirlikleri, Katar ve Türkiye'ye kargo gönderiyoruz. Yeni ülkeler eklemek için çalışıyoruz — ülkeniz listede yoksa WhatsApp üzerinden bize ulaşın.",
+    category: "shipping",
+  },
+  {
+    id: "faq-shipping-2",
+    question: "Teslimat ne kadar sürer?",
+    answer:
+      "Suudi Arabistan, BAE ve Katar'a standart teslimat genellikle 5–10 iş günü sürmektedir. Teslimat süreleri konumunuza ve gümrük işlemlerine göre değişebilir.",
+    category: "shipping",
+  },
+  {
+    id: "faq-shipping-3",
+    question: "Kargo ücretsiz mi?",
+    answer:
+      "Evet — 50 doların üzerindeki tüm siparişlerde ücretsiz kargo sunuyoruz. 50 doların altındaki siparişler için sabit bir kargo ücreti uygulanır. Aura Stor ekibimiz sipariş sırasında kargo ücretlerini size bildirir.",
+    category: "shipping",
+  },
+  {
+    id: "faq-shipping-4",
+    question: "Siparişim nasıl paketlenir?",
+    answer:
+      "Tüm Aura Stor parçaları markalı kadife hediye kesesi içinde gönderilir. Siparişler, parçalarınızın mükemmel koşullarda ulaşması için koruyucu ambalajla kargoya verilir.",
+    category: "shipping",
+  },
+
+  // İADE
+  {
+    id: "faq-returns-1",
+    question: "İade politikanız nedir?",
+    answer:
+      "Teslimat tarihinden itibaren 14 gün içinde, kullanılmamış ve orijinal ambalajındaki ürünler için iade kabul ediyoruz. Özel siparişler kesin satıştır. İade başlatmak için lütfen WhatsApp üzerinden bize ulaşın.",
+    category: "returns",
+  },
+  {
+    id: "faq-returns-2",
+    question: "Siparişim hasarlı gelirse ne yapmalıyım?",
+    answer:
+      "Siparişiniz hasarlı gelirse, ürünü ve ambalajı fotoğraflayın ve siparişi teslim aldıktan sonraki 48 saat içinde WhatsApp üzerinden bize ulaşın. Derhal yenisiyle değiştirme veya iade işlemi yapacağız.",
+    category: "returns",
+  },
+
+  // ÜRÜNLER
+  {
+    id: "faq-products-1",
+    question: "Taşlarınız gerçek doğal kristal mi?",
+    answer:
+      "Evet — her zaman. Aura Stor koleksiyonundaki her taş 100% doğaldır. Sentetik, boyalı veya laboratuvarda üretilmiş taş kullanmıyoruz. Her parça toprağın gerçek enerjisini ve karakterini taşır.",
+    category: "products",
+  },
+  {
+    id: "faq-products-2",
+    question: "Parçam fotoğraftaki gibi görünecek mi?",
+    answer:
+      "Her doğal taş benzersiz olduğu için parçanız, ürün fotoğrafına kıyasla renk, damar veya desen bakımından hafif farklılıklar gösterebilir. Bu, doğal kristallerin güzelliğidir — hiçbir ikisi aynı değildir. Bu farklar parçanızı gerçekten biricik kılar.",
+    category: "products",
+  },
+  {
+    id: "faq-products-3",
+    question: "Kristal takılarıma nasıl bakmalıyım?",
+    answer:
+      "Her ürün sayfasında o taşa özgü bakım talimatları yer almaktadır. Genel olarak: su, parfüm ve kimyasallarla temastan kaçının. Takmadığınızda dahil edilen kadife kesede saklayın. Aylık olarak ay ışığında veya adaçayı dumanıyla enerjetik arındırma yapın.",
+    category: "products",
+  },
+
+  // KRİSTALLER
+  {
+    id: "faq-crystals-1",
+    question: "Benim için doğru kristali nasıl seçerim?",
+    answer:
+      "İçgüdünüze güvenin — en çok çekildiğiniz taş çoğunlukla ihtiyacınız olandır. Her taşın anlam ve enerjisini keşfetmek için Kristal Rehberimizi de kullanabilirsiniz. Ya da WhatsApp üzerinden bize ulaşın; ekibimiz aradığınıza göre seçim yapmanıza yardımcı olsun.",
+    category: "crystals",
+  },
+  {
+    id: "faq-crystals-2",
+    question: "Kristallerin gerçekten şifa özellikleri var mı?",
+    answer:
+      "Kristal şifası, pek çok kültürde antik geleneklere dayanan bir uygulamadır. Tıbbi tavsiyenin yerini tutmasa da birçok insan, belirli taşlar takmanın niyet belirleme, bilinçli farkındalık ve duygusal esenliği desteklediğini deneyimlemektedir. Niyet gücüne inanıyoruz — ve önem verdiğinizi size hatırlatan bir şey taşımaya.",
+    category: "crystals",
+  },
+];
+
+export function getFAQs(locale: string): FAQ[] {
+  return locale === "tr" ? faqsTr : faqs;
+}
+
 export function getFAQsByCategory(category: FAQ["category"]): FAQ[] {
   return faqs.filter((f) => f.category === category);
 }

@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 import PageHeader from "@/components/layout/PageHeader";
 import { ScrollReveal, StaggerReveal } from "@/components/ui/ScrollReveal";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { getTranslations , setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -16,20 +16,6 @@ export async function generateMetadata({
   return { title: t("shippingTitle") };
 }
 
-const SHIPPING_REGIONS = [
-  { country: "Saudi Arabia", flag: "🇸🇦", time: "5–10 business days", fee: "Free on orders above $50" },
-  { country: "United Arab Emirates", flag: "🇦🇪", time: "5–10 business days", fee: "Free on orders above $50" },
-  { country: "Qatar", flag: "🇶🇦", time: "5–10 business days", fee: "Free on orders above $50" },
-  { country: "Turkey", flag: "🇹🇷", time: "7–14 business days", fee: "Contact us for rates" },
-];
-
-const HIGHLIGHTS = [
-  { label: "Free Shipping", value: "On all orders above $50", note: "Flat fee applies for smaller orders" },
-  { label: "Delivery Time", value: "5–10 Business Days", note: "To Saudi Arabia, UAE & Qatar" },
-  { label: "Packaging", value: "Velvet Gift Pouch", note: "Every order, every time" },
-  { label: "Tracking", value: "Via WhatsApp", note: "We keep you updated personally" },
-];
-
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -38,12 +24,37 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export default function ShippingPage() {
-  const waMessage = "Hello! I have a question about shipping and delivery for an Aura Stor order.";
+export default async function ShippingPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "shipping" });
+
+  const HIGHLIGHTS = [
+    { label: t("highlightFreeShipping"), value: t("highlightFreeShippingValue"), note: t("highlightFreeShippingNote") },
+    { label: t("highlightDelivery"), value: t("highlightDeliveryValue"), note: t("highlightDeliveryNote") },
+    { label: t("highlightPackaging"), value: t("highlightPackagingValue"), note: t("highlightPackagingNote") },
+    { label: t("highlightTracking"), value: t("highlightTrackingValue"), note: t("highlightTrackingNote") },
+  ];
+
+  const SHIPPING_REGIONS = [
+    { country: t("countryKSA"), flag: "🇸🇦", time: t("timeKSA"), fee: t("feeKSA") },
+    { country: t("countryUAE"), flag: "🇦🇪", time: t("timeUAE"), fee: t("feeUAE") },
+    { country: t("countryQatar"), flag: "🇶🇦", time: t("timeQatar"), fee: t("feeQatar") },
+    { country: t("countryTurkey"), flag: "🇹🇷", time: t("timeTurkey"), fee: t("feeTurkey") },
+  ];
 
   return (
     <>
-      <PageHeader label="Delivery" title="Shipping & Delivery" subtitle="Every order is packaged with care and shipped directly to you." bg="ivory" />
+      <PageHeader
+        label={t("pageLabel")}
+        title={t("pageTitle")}
+        subtitle={t("subtitle")}
+        bg="ivory"
+      />
 
       <section className="bg-ivory section-padding-sm">
         <div className="container-luxury">
@@ -65,7 +76,7 @@ export default function ShippingPage() {
         <div className="container-luxury max-w-2xl mx-auto">
           <ScrollReveal>
             <h2 className="font-serif font-light text-brown mb-6" style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)" }}>
-              Where We Ship
+              {t("whereWeShip")}
             </h2>
           </ScrollReveal>
           <div className="divide-y divide-brown/8">
@@ -91,18 +102,18 @@ export default function ShippingPage() {
         <div className="container-luxury text-center">
           <ScrollReveal>
             <a
-              href={buildWhatsAppUrl(waMessage)}
+              href={buildWhatsAppUrl(t("waMessage"))}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 bg-whatsapp text-white font-sans font-semibold text-sm py-3.5 px-7 rounded-xl shadow-whatsapp hover:opacity-90 transition-opacity duration-200"
             >
               <WhatsAppIcon className="w-4 h-4 flex-shrink-0" />
-              Ask on WhatsApp
+              {t("askWhatsApp")}
             </a>
             <div className="flex items-center justify-center gap-4 mt-6">
-              <Link href="/returns" className="font-sans text-xs text-brown/35 hover:text-sage transition-colors duration-200">Returns Policy &rarr;</Link>
+              <Link href="/returns" className="font-sans text-xs text-brown/35 hover:text-sage transition-colors duration-200">{t("returnsPolicy")} &rarr;</Link>
               <span className="text-brown/20">|</span>
-              <Link href="/faq" className="font-sans text-xs text-brown/35 hover:text-sage transition-colors duration-200">FAQ &rarr;</Link>
+              <Link href="/faq" className="font-sans text-xs text-brown/35 hover:text-sage transition-colors duration-200">{t("faq")} &rarr;</Link>
             </div>
           </ScrollReveal>
         </div>

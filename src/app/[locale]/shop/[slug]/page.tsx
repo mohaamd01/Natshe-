@@ -15,7 +15,7 @@ import RelatedProducts from "@/components/shop/RelatedProducts";
 import StickyMobileWhatsAppBar from "@/components/shop/StickyMobileWhatsAppBar";
 import ComingSoon from "@/components/shop/ComingSoon";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export function generateStaticParams() {
   const categorySlugs = PRODUCT_CATEGORIES.map((c) => ({ locale: "en", slug: c.slug }));
@@ -58,15 +58,26 @@ export default async function ShopSlugPage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "shop" });
+  const tProduct = await getTranslations({ locale, namespace: "product" });
 
   const category = PRODUCT_CATEGORIES.find((c) => c.slug === slug);
   if (category) {
-    return <CategoryPage categorySlug={slug} categoryLabel={category.label} categoryDescription={category.description} />;
+    const translatedLabel = t(`categoryLabels.${category.slug}` as Parameters<typeof t>[0]);
+    return (
+      <CategoryPage
+        categorySlug={slug}
+        categoryLabel={translatedLabel}
+        categoryDescription={category.description}
+        t={t}
+      />
+    );
   }
 
   const product = getProductBySlug(slug);
   if (product) {
-    return <ProductDetailPage slug={slug} />;
+    const waMessage = tProduct("waMessage", { product: product.name, price: formatPrice(product.price) });
+    return <ProductDetailPage slug={slug} t={t} waMessage={waMessage} />;
   }
 
   notFound();
@@ -79,14 +90,18 @@ const COMING_SOON_TAGLINES: Record<string, string> = {
   "crystal-bracelets": "Natural stone beaded bracelets for daily wear.",
 };
 
+type TFunction = Awaited<ReturnType<typeof getTranslations<"shop">>>;
+
 function CategoryPage({
   categorySlug,
   categoryLabel,
   categoryDescription,
+  t,
 }: {
   categorySlug: string;
   categoryLabel: string;
   categoryDescription: string;
+  t: TFunction;
 }) {
   if (COMING_SOON_CATEGORIES.has(categorySlug)) {
     return (
@@ -101,13 +116,13 @@ function CategoryPage({
 
   return (
     <>
-      <PageHeader label="Shop" title={categoryLabel} subtitle={categoryDescription} />
+      <PageHeader label={t("breadcrumbShop")} title={categoryLabel} subtitle={categoryDescription} />
 
       <div className="bg-ivory section-padding">
         <div className="container-luxury">
           <div className="flex flex-wrap gap-2 mb-10">
             <Link href="/shop" className="px-4 py-1.5 rounded-full border border-brown/20 text-brown/60 font-sans text-xs font-medium tracking-wide hover:border-sage hover:text-sage transition-colors duration-200">
-              All
+              {t("all")}
             </Link>
             {PRODUCT_CATEGORIES.map((cat) => (
               <Link
@@ -119,29 +134,27 @@ function CategoryPage({
                     : "border border-brown/20 text-brown/60 hover:border-sage hover:text-sage"
                 }`}
               >
-                {cat.label}
+                {t(`categoryLabels.${cat.slug}` as Parameters<typeof t>[0])}
               </Link>
             ))}
           </div>
 
           <p className="font-sans text-xs text-brown/40 mb-6">
-            {categoryProducts.length} {categoryProducts.length === 1 ? "product" : "products"}
+            {categoryProducts.length} {t("productsCount", { count: categoryProducts.length })}
           </p>
 
-          <ProductGrid products={categoryProducts} cols={3} emptyMessage="No products in this category yet." />
+          <ProductGrid products={categoryProducts} cols={3} emptyMessage={t("empty")} />
         </div>
       </div>
     </>
   );
 }
 
-function ProductDetailPage({ slug }: { slug: string }) {
+function ProductDetailPage({ slug, t, waMessage }: { slug: string; t: TFunction; waMessage: string }) {
   const product = getProductBySlug(slug)!;
   const related = getRelatedProducts(product.relatedProductIds ?? []);
   const categoryLabel = PRODUCT_CATEGORIES.find((c) => c.slug === product.category)?.label ?? "Shop";
   const crystal = getCrystalByType(product.stone);
-
-  const waMessage = `Hello! I'd like to order the "${product.name}" from Aura Stor. Is it available? Price shown: ${formatPrice(product.price)}`;
 
   function WhatsAppIcon({ className }: { className?: string }) {
     return (
@@ -176,9 +189,9 @@ function ProductDetailPage({ slug }: { slug: string }) {
       <div className="bg-ivory border-b border-brown/10">
         <div className="container-luxury py-3">
           <nav className="flex items-center gap-1.5 font-sans text-xs text-brown/40" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-sage transition-colors duration-200">Home</Link>
+            <Link href="/" className="hover:text-sage transition-colors duration-200">{t("breadcrumbHome")}</Link>
             <span>/</span>
-            <Link href="/shop" className="hover:text-sage transition-colors duration-200">Shop</Link>
+            <Link href="/shop" className="hover:text-sage transition-colors duration-200">{t("breadcrumbShop")}</Link>
             <span>/</span>
             <Link href={`/shop/${product.category}`} className="hover:text-sage transition-colors duration-200">{categoryLabel}</Link>
             <span>/</span>
@@ -197,10 +210,14 @@ function ProductDetailPage({ slug }: { slug: string }) {
             <ScrollReveal direction="right" threshold={0} className="flex flex-col gap-6">
               <div className="flex gap-2">
                 {product.isBestSeller && (
-                  <span className="bg-gold/20 text-brown text-[10px] font-sans font-semibold tracking-wide px-3 py-1 rounded-full border border-gold/30">Best Seller</span>
+                  <span className="bg-gold/20 text-brown text-[10px] font-sans font-semibold tracking-wide px-3 py-1 rounded-full border border-gold/30">
+                    {t("bestSeller")}
+                  </span>
                 )}
                 {product.isNewArrival && (
-                  <span className="bg-sage/15 text-sage text-[10px] font-sans font-semibold tracking-wide px-3 py-1 rounded-full border border-sage/30">New Arrival</span>
+                  <span className="bg-sage/15 text-sage text-[10px] font-sans font-semibold tracking-wide px-3 py-1 rounded-full border border-sage/30">
+                    {t("newArrival")}
+                  </span>
                 )}
               </div>
 
@@ -213,7 +230,7 @@ function ProductDetailPage({ slug }: { slug: string }) {
 
               <div className="flex items-baseline gap-3">
                 <span className="font-serif text-3xl text-sage font-medium">{formatPrice(product.price)}</span>
-                <span className="font-sans text-xs text-brown/40 tracking-wide">Free shipping on orders above $50</span>
+                <span className="font-sans text-xs text-brown/40 tracking-wide">{t("freeShipping")}</span>
               </div>
 
               <p className="font-sans text-sm text-brown/65 leading-relaxed border-t border-brown/10 pt-5">{product.shortDescription}</p>
@@ -227,10 +244,10 @@ function ProductDetailPage({ slug }: { slug: string }) {
                   className="flex items-center justify-center gap-3 w-full bg-whatsapp text-white font-sans font-semibold text-base py-4 rounded-xl shadow-whatsapp hover:opacity-90 active:scale-[0.99] transition-all duration-200"
                 >
                   <WhatsAppIcon className="w-5 h-5" />
-                  Order via WhatsApp
+                  {t("orderWhatsApp")}
                 </a>
                 <p className="text-center font-sans text-xs text-brown/40">
-                  We reply within a few hours &bull; Mon &ndash; Sun, 9 AM &ndash; 10 PM
+                  {t("replyTime")} &bull; {t("businessHours")}
                 </p>
               </div>
 
@@ -247,8 +264,8 @@ function ProductDetailPage({ slug }: { slug: string }) {
                 >
                   <span className="text-gold text-base leading-none">✦</span>
                   <div className="flex-1 min-w-0">
-                    <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-brown/40 mb-0.5">Crystal Guide</p>
-                    <p className="font-sans text-sm text-brown font-medium truncate">Discover the energy of {crystal.name}</p>
+                    <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-brown/40 mb-0.5">{t("crystalGuideLabel")}</p>
+                    <p className="font-sans text-sm text-brown font-medium truncate">{t("crystalGuideLink", { crystal: crystal.name })}</p>
                   </div>
                   <span className="text-brown/30 group-hover:text-sage text-sm transition-colors duration-200">&rarr;</span>
                 </Link>

@@ -4,7 +4,7 @@ import PageHeader from "@/components/layout/PageHeader";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { buildWhatsAppUrl, getWhatsAppUrl } from "@/lib/whatsapp";
 import { CONTACT, SOCIAL } from "@/lib/constants";
-import { getTranslations , setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -17,15 +17,6 @@ export async function generateMetadata({
   return { title: t("contactTitle") };
 }
 
-const TOPICS = [
-  { label: "Place an Order", message: "Hello! I'd like to place an order for an Aura Stor product. Can you help me?" },
-  { label: "Custom Request", message: "Hello! I'd like to create a custom crystal piece from Aura Stor. How does that work?" },
-  { label: "Gift Consultation", message: "Hello! I'm looking for a gift from Aura Stor. Can you help me choose the right crystal piece?" },
-  { label: "Shipping Question", message: "Hello! I have a question about shipping and delivery for my Aura Stor order." },
-  { label: "Return or Exchange", message: "Hello! I have a question about returning or exchanging an Aura Stor order." },
-  { label: "General Enquiry", message: "Hello! I have a question about Aura Stor." },
-];
-
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -34,13 +25,30 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "contact" });
+
+  const TOPICS = [
+    { label: t("topicOrder"), message: t("topicOrderMsg") },
+    { label: t("topicCustom"), message: t("topicCustomMsg") },
+    { label: t("topicGift"), message: t("topicGiftMsg") },
+    { label: t("topicShipping"), message: t("topicShippingMsg") },
+    { label: t("topicReturn"), message: t("topicReturnMsg") },
+    { label: t("topicGeneral"), message: t("topicGeneralMsg") },
+  ];
+
   return (
     <>
       <PageHeader
-        label="Reach Out"
-        title="Contact Us"
-        subtitle="We are a WhatsApp-first brand. Every message is answered by a real person."
+        label={t("label")}
+        title={t("pageTitle")}
+        subtitle={t("subtitle")}
         bg="ivory"
       />
 
@@ -52,10 +60,10 @@ export default function ContactPage() {
                 <WhatsAppIcon className="w-7 h-7 text-white" />
               </div>
               <h2 className="font-serif font-light text-brown mb-2" style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)" }}>
-                WhatsApp — Our Primary Channel
+                {t("primaryChannel")}
               </h2>
               <p className="font-sans text-sm text-brown/55 leading-relaxed mb-6">
-                All orders, enquiries, and custom requests are handled personally via WhatsApp.
+                {t("primaryChannelBody")}
               </p>
               <a
                 href={getWhatsAppUrl()}
@@ -64,7 +72,7 @@ export default function ContactPage() {
                 className="inline-flex items-center gap-2.5 bg-whatsapp text-white font-sans font-semibold text-sm py-4 px-8 rounded-xl shadow-whatsapp hover:opacity-90 active:scale-95 transition-all duration-200 w-full justify-center"
               >
                 <WhatsAppIcon className="w-5 h-5 flex-shrink-0" />
-                Open WhatsApp Chat
+                {t("openWhatsApp")}
               </a>
               <p className="font-sans text-xs text-brown/40 mt-3">
                 {CONTACT.businessDays} &bull; {CONTACT.businessHours}
@@ -78,7 +86,7 @@ export default function ContactPage() {
         <div className="container-luxury max-w-2xl mx-auto">
           <ScrollReveal>
             <h2 className="font-serif font-light text-brown text-center mb-8" style={{ fontSize: "clamp(1.3rem, 2vw, 1.6rem)" }}>
-              What Can We Help With?
+              {t("helpTitle")}
             </h2>
           </ScrollReveal>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -105,10 +113,10 @@ export default function ContactPage() {
           <ScrollReveal>
             <div className="space-y-4">
               {[
-                { label: "Availability", value: `${CONTACT.businessDays}, ${CONTACT.businessHours}` },
-                { label: "Response Time", value: CONTACT.responseTime },
-                { label: "Shipping Regions", value: "Saudi Arabia, UAE, Qatar" },
-                { label: "Instagram", value: SOCIAL.instagramHandle, href: SOCIAL.instagram },
+                { label: t("availability"), value: `${CONTACT.businessDays}, ${CONTACT.businessHours}` },
+                { label: t("responseTime"), value: CONTACT.responseTime },
+                { label: t("shippingRegions"), value: t("shippingRegionValue") },
+                { label: t("instagram"), value: SOCIAL.instagramHandle, href: SOCIAL.instagram },
               ].map(({ label, value, href }) => (
                 <div key={label} className="flex items-start justify-between gap-4 py-3 border-b border-brown/8 last:border-0">
                   <span className="font-sans text-xs tracking-wide uppercase text-brown/35 flex-shrink-0 mt-0.5">{label}</span>
@@ -130,9 +138,9 @@ export default function ContactPage() {
       <section className="bg-ivory-dark border-t border-brown/10 py-8">
         <div className="container-luxury text-center">
           <ScrollReveal>
-            <p className="font-sans text-sm text-brown/50 mb-3">Looking for quick answers?</p>
+            <p className="font-sans text-sm text-brown/50 mb-3">{t("faqTeaser")}</p>
             <Link href="/faq" className="font-sans text-sm text-sage font-medium hover:text-sage-dark transition-colors duration-200">
-              Read our FAQ &rarr;
+              {t("readFaq")} &rarr;
             </Link>
           </ScrollReveal>
         </div>

@@ -4,7 +4,7 @@ import { products } from "@/data/products";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
 import PageHeader from "@/components/layout/PageHeader";
 import ProductGrid from "@/components/shop/ProductGrid";
-import { getTranslations , setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -23,14 +23,15 @@ export default async function ShopPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "shop" });
 
   return (
     <>
       <PageHeader
-        label="The Collection"
-        title="All Products"
-        subtitle="Handcrafted from 100% natural gemstones. Every piece is one-of-a-kind."
+        label={t("pageLabel")}
+        title={t("pageTitle")}
+        subtitle={t("pageSubtitle")}
       />
 
       <div className="bg-ivory section-padding">
@@ -45,13 +46,13 @@ export default async function ShopPage({
                 href={`/shop/${cat.slug}`}
                 className="px-4 py-1.5 rounded-full border border-brown/20 text-brown/60 font-sans text-xs font-medium tracking-wide hover:border-sage hover:text-sage transition-colors duration-200"
               >
-                {cat.label}
+                {t(`categoryLabels.${cat.slug}` as Parameters<typeof t>[0])}
               </Link>
             ))}
           </div>
 
           <p className="font-sans text-xs text-brown/40 mb-6">
-            {products.length} {t("products", { count: products.length })}
+            {products.length} {t("productsCount", { count: products.length })}
           </p>
 
           <ProductGrid products={products} cols={3} />
@@ -62,10 +63,10 @@ export default async function ShopPage({
         <div className="container-luxury">
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
-              "100% Natural Gemstones",
-              "Velvet Gift Packaging",
-              "WhatsApp Support",
-              "Free Shipping Over $50",
+              t("assurance1"),
+              t("assurance2"),
+              t("assurance3"),
+              t("assurance4"),
             ].map((item) => (
               <div key={item} className="flex items-center gap-2">
                 <span className="text-gold text-xs">✦</span>

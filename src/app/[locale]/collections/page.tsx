@@ -4,7 +4,7 @@ import Image from "next/image";
 import { collections } from "@/data/collections";
 import PageHeader from "@/components/layout/PageHeader";
 import { ScrollReveal, StaggerReveal } from "@/components/ui/ScrollReveal";
-import { getTranslations , setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -23,14 +23,15 @@ export default async function CollectionsPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "collections" });
 
   return (
     <>
       <PageHeader
-        label="Curated"
-        title="Collections"
-        subtitle="Each collection is built around a single stone, a single energy, and a single intention."
+        label={t("pageLabel")}
+        title={t("pageTitle")}
+        subtitle={t("pageSubtitle")}
         bg="ivory"
       />
 
@@ -38,7 +39,7 @@ export default async function CollectionsPage({
         <div className="container-luxury max-w-xl mx-auto text-center">
           <ScrollReveal>
             <p className="font-sans text-sm text-brown/55 leading-relaxed">
-              We do not just sell jewelry. We tell stories. Every Aura Stor collection begins with a stone — its history, its energy, its meaning across cultures.
+              {t("pageIntro")}
             </p>
           </ScrollReveal>
         </div>
@@ -70,7 +71,7 @@ export default async function CollectionsPage({
                     </h2>
                     <p className="font-serif italic text-ivory/60 text-sm font-light mb-4 line-clamp-2">&ldquo;{collection.tagline}&rdquo;</p>
                     <div className="inline-flex items-center gap-2 self-start bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 group-hover:bg-gold/20 group-hover:border-gold/30 transition-all duration-300">
-                      <span className="font-sans text-xs text-ivory font-medium">Explore Collection</span>
+                      <span className="font-sans text-xs text-ivory font-medium">{t("exploreCollection")}</span>
                       <span className="text-ivory/60 text-xs group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
                     </div>
                   </div>
@@ -86,10 +87,10 @@ export default async function CollectionsPage({
           <ScrollReveal>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link href="/crystal-guide" className="inline-flex items-center gap-2 bg-brown text-ivory font-sans font-medium text-sm py-3 px-7 rounded-xl hover:bg-sage transition-colors duration-300">
-                Read the Crystal Guide
+                {t("readCrystalGuide")}
               </Link>
               <Link href="/shop" className="inline-flex items-center gap-2 border border-brown/25 text-brown font-sans font-medium text-sm py-3 px-7 rounded-xl hover:border-sage hover:text-sage transition-colors duration-200">
-                Browse All Products
+                {t("browseAllProducts")}
               </Link>
             </div>
           </ScrollReveal>

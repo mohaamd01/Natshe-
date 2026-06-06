@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 import PageHeader from "@/components/layout/PageHeader";
 import { ScrollReveal, StaggerReveal } from "@/components/ui/ScrollReveal";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { getTranslations , setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -16,33 +16,6 @@ export async function generateMetadata({
   return { title: t("customOrdersTitle") };
 }
 
-const STEPS = [
-  {
-    number: "01",
-    title: "Tell Us Your Vision",
-    body: "Send us a WhatsApp message describing what you have in mind — which stone or energy you are drawn to, the type of piece (bracelet, ring, necklace, set), and who it is for.",
-  },
-  {
-    number: "02",
-    title: "We Design Together",
-    body: "Our team will share options, answer questions, and help you refine your vision. We can suggest stone combinations, discuss energies, and ensure the final piece aligns with your intention.",
-  },
-  {
-    number: "03",
-    title: "Crafted & Delivered",
-    body: "Once confirmed, your custom piece is handcrafted and packaged in our signature velvet gift pouch with a crystal meaning card. Delivery to Saudi Arabia, UAE, and Qatar.",
-  },
-];
-
-const CUSTOM_IDEAS = [
-  "A specific stone combination not in our current collection",
-  "A matching set for you and a loved one",
-  "A gift set curated for a specific intention (calm, courage, love)",
-  "A ring in a stone we have not yet listed",
-  "A larger beaded bracelet for a different wrist size",
-  "An anniversary, birthday, or Eid gift, thoughtfully chosen",
-];
-
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -51,19 +24,43 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export default function CustomOrdersPage() {
-  const waMessage = "Hello! I'm interested in a custom crystal piece from Aura Stor. I'd love to discuss what's possible.";
+export default async function CustomOrdersPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "customOrders" });
+
+  const STEPS = [
+    { number: t("step1Number"), title: t("step1Title"), body: t("step1Body") },
+    { number: t("step2Number"), title: t("step2Title"), body: t("step2Body") },
+    { number: t("step3Number"), title: t("step3Title"), body: t("step3Body") },
+  ];
+
+  const CUSTOM_IDEAS = [
+    t("idea1"),
+    t("idea2"),
+    t("idea3"),
+    t("idea4"),
+    t("idea5"),
+    t("idea6"),
+  ];
 
   return (
     <>
-      <PageHeader label="Bespoke" title="Custom Orders" subtitle="Every piece we make is personal. A custom order is just even more so." bg="ivory" />
+      <PageHeader
+        label={t("pageLabel")}
+        title={t("pageTitle")}
+        subtitle={t("subtitle")}
+        bg="ivory"
+      />
 
       <section className="bg-ivory section-padding-sm">
         <div className="container-luxury max-w-xl mx-auto text-center">
           <ScrollReveal>
-            <p className="font-sans text-sm text-brown/60 leading-loose">
-              Our standard collection is thoughtfully curated, but we know that the perfect piece is sometimes one that does not exist yet.
-            </p>
+            <p className="font-sans text-sm text-brown/60 leading-loose">{t("intro")}</p>
           </ScrollReveal>
         </div>
       </section>
@@ -73,7 +70,7 @@ export default function CustomOrdersPage() {
           <ScrollReveal>
             <div className="text-center mb-12">
               <h2 className="font-serif font-light text-ivory" style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}>
-                How Custom Orders Work
+                {t("howItWorksTitle")}
               </h2>
             </div>
           </ScrollReveal>
@@ -97,7 +94,7 @@ export default function CustomOrdersPage() {
         <div className="container-luxury max-w-xl mx-auto">
           <ScrollReveal>
             <h2 className="font-serif font-light text-brown mb-6" style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.9rem)" }}>
-              What We Can Create For You
+              {t("whatWeCreateTitle")}
             </h2>
             <div className="space-y-3">
               {CUSTOM_IDEAS.map((idea) => (
@@ -115,13 +112,13 @@ export default function CustomOrdersPage() {
         <div className="container-luxury text-center">
           <ScrollReveal>
             <a
-              href={buildWhatsAppUrl(waMessage)}
+              href={buildWhatsAppUrl(t("waMessage"))}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 bg-whatsapp text-white font-sans font-semibold text-sm py-4 px-8 rounded-xl shadow-whatsapp hover:opacity-90 active:scale-95 transition-all duration-200"
             >
               <WhatsAppIcon className="w-4 h-4 flex-shrink-0" />
-              Message Us on WhatsApp
+              {t("messageUs")}
             </a>
           </ScrollReveal>
         </div>
@@ -129,11 +126,11 @@ export default function CustomOrdersPage() {
 
       <div className="bg-ivory border-t border-brown/8 py-8">
         <div className="container-luxury flex flex-wrap items-center justify-center gap-4">
-          <Link href="/crystal-guide" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">Crystal Guide</Link>
+          <Link href="/crystal-guide" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">{t("crystalGuide")}</Link>
           <span className="text-brown/20">|</span>
-          <Link href="/shop" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">Browse All Products</Link>
+          <Link href="/shop" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">{t("browseProducts")}</Link>
           <span className="text-brown/20">|</span>
-          <Link href="/gift-sets" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">Gift Sets</Link>
+          <Link href="/gift-sets" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">{t("giftSets")}</Link>
         </div>
       </div>
     </>

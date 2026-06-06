@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
-import { faqs } from "@/data/faq";
+import { getFAQs } from "@/data/faq";
 import PageHeader from "@/components/layout/PageHeader";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { getTranslations , setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -18,14 +18,6 @@ export async function generateMetadata({
   return { title: t("faqTitle") };
 }
 
-const CATEGORIES: { key: string; label: string; id: string }[] = [
-  { key: "ordering", label: "Ordering", id: "ordering" },
-  { key: "shipping", label: "Shipping", id: "shipping" },
-  { key: "returns", label: "Returns", id: "returns" },
-  { key: "products", label: "Our Products", id: "products" },
-  { key: "crystals", label: "Crystals", id: "crystals" },
-];
-
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -34,15 +26,30 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export default function FAQPage() {
-  const waMessage = "Hello! I have a question about Aura Stor that I couldn't find in the FAQ. Can you help?";
+export default async function FAQPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "faq" });
+  const faqs = getFAQs(locale);
+
+  const CATEGORIES: { key: string; label: string; id: string }[] = [
+    { key: "ordering", label: t("catOrdering"), id: "ordering" },
+    { key: "shipping", label: t("catShipping"), id: "shipping" },
+    { key: "returns", label: t("catReturns"), id: "returns" },
+    { key: "products", label: t("catProducts"), id: "products" },
+    { key: "crystals", label: t("catCrystals"), id: "crystals" },
+  ];
 
   return (
     <>
       <PageHeader
-        label="Support"
-        title="Frequently Asked Questions"
-        subtitle="Everything you need to know, answered honestly."
+        label={t("pageLabel")}
+        title={t("pageTitle")}
+        subtitle={t("subtitle")}
         bg="ivory"
       />
 
@@ -87,28 +94,28 @@ export default function FAQPage() {
         <div className="container-luxury text-center">
           <ScrollReveal>
             <h2 className="font-serif font-light text-ivory mb-4" style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.9rem)" }}>
-              Ask Us Directly on WhatsApp
+              {t("askDirectly")}
             </h2>
             <a
-              href={buildWhatsAppUrl(waMessage)}
+              href={buildWhatsAppUrl(t("waMessage"))}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 bg-whatsapp text-white font-sans font-semibold text-sm py-3.5 px-7 rounded-xl shadow-whatsapp hover:opacity-90 active:scale-95 transition-all duration-200"
             >
               <WhatsAppIcon className="w-4 h-4 flex-shrink-0" />
-              Send Us a Message
+              {t("sendMessage")}
             </a>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 pt-8 border-t border-white/10">
               <Link href="/contact" className="font-sans text-xs text-ivory/40 hover:text-gold transition-colors duration-200">
-                Contact page &rarr;
+                {t("contactPage")} &rarr;
               </Link>
               <span className="text-white/20 hidden sm:block">|</span>
               <Link href="/shipping" className="font-sans text-xs text-ivory/40 hover:text-gold transition-colors duration-200">
-                Shipping info &rarr;
+                {t("shippingInfo")} &rarr;
               </Link>
               <span className="text-white/20 hidden sm:block">|</span>
               <Link href="/returns" className="font-sans text-xs text-ivory/40 hover:text-gold transition-colors duration-200">
-                Returns policy &rarr;
+                {t("returnsPolicy")} &rarr;
               </Link>
             </div>
           </ScrollReveal>

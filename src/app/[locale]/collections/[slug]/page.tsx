@@ -8,7 +8,7 @@ import { getCrystalByType } from "@/data/crystals";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { ScrollReveal, StaggerReveal } from "@/components/ui/ScrollReveal";
 import ProductGrid from "@/components/shop/ProductGrid";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
@@ -42,6 +42,8 @@ export default async function CollectionDetailPage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "collections" });
+
   const collection = getCollectionBySlug(slug);
   if (!collection) notFound();
 
@@ -49,7 +51,7 @@ export default async function CollectionDetailPage({
   const crystal = getCrystalByType(collection.stone);
   const otherCollections = collections.filter((c) => c.slug !== slug).slice(0, 3);
 
-  const waMessage = `Hello! I'm interested in the ${collection.name} collection at Aura Stor. Can you tell me more about the pieces?`;
+  const waMessage = t("waMessage", { collection: collection.name });
 
   function WhatsAppIcon({ className }: { className?: string }) {
     return (
@@ -67,7 +69,7 @@ export default async function CollectionDetailPage({
           <div className="absolute inset-0 bg-gradient-to-b from-brown/70 via-brown/50 to-brown/80" />
         </div>
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 py-16 md:py-20 min-h-[55vh]">
-          <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-gold/80 mb-4">{collection.stoneName} Collection</p>
+          <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-gold/80 mb-4">{t("stoneCollection", { stone: collection.stoneName })}</p>
           <h1 className="font-serif font-light text-ivory leading-tight mb-4" style={{ fontSize: "clamp(2.2rem, 6vw, 4rem)" }}>{collection.name}</h1>
           <p className="font-serif italic text-ivory/60 text-xl font-light mb-8 max-w-lg">&ldquo;{collection.tagline}&rdquo;</p>
           <a
@@ -77,7 +79,7 @@ export default async function CollectionDetailPage({
             className="inline-flex items-center gap-2.5 bg-whatsapp text-white font-sans font-semibold text-sm py-3.5 px-7 rounded-xl shadow-whatsapp hover:opacity-90 active:scale-95 transition-all duration-200"
           >
             <WhatsAppIcon className="w-4 h-4 flex-shrink-0" />
-            Enquire via WhatsApp
+            {t("enquire")}
           </a>
         </div>
       </div>
@@ -85,9 +87,9 @@ export default async function CollectionDetailPage({
       <div className="bg-ivory-dark border-b border-brown/10">
         <div className="container-luxury py-3">
           <nav className="flex items-center gap-1.5 font-sans text-xs text-brown/40" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-sage transition-colors duration-200">Home</Link>
+            <Link href="/" className="hover:text-sage transition-colors duration-200">{t("breadcrumbHome")}</Link>
             <span>/</span>
-            <Link href="/collections" className="hover:text-sage transition-colors duration-200">Collections</Link>
+            <Link href="/collections" className="hover:text-sage transition-colors duration-200">{t("breadcrumbCollections")}</Link>
             <span>/</span>
             <span className="text-brown/70">{collection.name}</span>
           </nav>
@@ -97,7 +99,7 @@ export default async function CollectionDetailPage({
       <section className="bg-ivory section-padding-sm">
         <div className="container-luxury max-w-2xl mx-auto text-center">
           <ScrollReveal>
-            <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-sage mb-4">About This Collection</p>
+            <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-sage mb-4">{t("aboutCollection")}</p>
             <p className="font-sans text-sm text-brown/65 leading-loose">{collection.description}</p>
           </ScrollReveal>
         </div>
@@ -108,11 +110,11 @@ export default async function CollectionDetailPage({
           <ScrollReveal>
             <div className="flex items-end justify-between mb-10">
               <div>
-                <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-brown/35 mb-2">The Pieces</p>
-                <h2 className="font-serif font-light text-brown" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}>Shop the Collection</h2>
+                <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-brown/35 mb-2">{t("thePieces")}</p>
+                <h2 className="font-serif font-light text-brown" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}>{t("shopCollection")}</h2>
               </div>
               <Link href="/shop" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200 hidden sm:block">
-                View all products &rarr;
+                {t("viewAllProducts")} &rarr;
               </Link>
             </div>
           </ScrollReveal>
@@ -130,11 +132,11 @@ export default async function CollectionDetailPage({
                 </div>
               </ScrollReveal>
               <ScrollReveal direction="right" className="flex flex-col gap-5">
-                <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-gold/70">The Stone</p>
+                <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-gold/70">{t("theStone")}</p>
                 <h2 className="font-serif font-light text-ivory leading-tight" style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}>{crystal.name}</h2>
                 <p className="font-sans text-sm text-ivory/50 leading-relaxed">{crystal.summary}</p>
                 <Link href={`/crystal-guide/${crystal.slug}`} className="inline-flex items-center gap-2 self-start font-sans text-sm text-gold hover:text-gold-light transition-colors duration-200 font-medium">
-                  Read the Full {crystal.name} Guide <span>&rarr;</span>
+                  {t("readFullGuide", { crystal: crystal.name })} <span>&rarr;</span>
                 </Link>
               </ScrollReveal>
             </div>
@@ -146,7 +148,9 @@ export default async function CollectionDetailPage({
         <section className="bg-ivory section-padding-sm border-t border-brown/10">
           <div className="container-luxury">
             <ScrollReveal>
-              <h2 className="font-serif font-light text-brown text-center mb-10" style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)" }}>Other Collections</h2>
+              <h2 className="font-serif font-light text-brown text-center mb-10" style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)" }}>
+                {t("otherCollections")}
+              </h2>
             </ScrollReveal>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <StaggerReveal stagger={80}>
@@ -164,7 +168,7 @@ export default async function CollectionDetailPage({
             </div>
             <div className="text-center mt-8">
               <Link href="/collections" className="font-sans text-xs text-brown/35 hover:text-sage transition-colors duration-200 tracking-wide">
-                View all collections &rarr;
+                {t("viewAll")} &rarr;
               </Link>
             </div>
           </div>

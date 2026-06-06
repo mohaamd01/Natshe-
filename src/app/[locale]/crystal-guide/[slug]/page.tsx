@@ -7,7 +7,7 @@ import { getProductsByStone } from "@/data/products";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { ScrollReveal, StaggerReveal } from "@/components/ui/ScrollReveal";
 import ProductGrid from "@/components/shop/ProductGrid";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
@@ -41,6 +41,8 @@ export default async function CrystalDetailPage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "crystalGuide" });
+
   const crystal = getCrystalBySlug(slug);
   if (!crystal) notFound();
 
@@ -49,15 +51,15 @@ export default async function CrystalDetailPage({
     .map((s) => getCrystalByType(s))
     .filter((c): c is NonNullable<typeof c> => Boolean(c));
 
-  const waMessage = `Hello! I just read about ${crystal.name} on your website and I'm interested in ${crystal.name} jewelry. Can you help me choose the right piece?`;
+  const waMessage = t("waMessageSlug", { crystal: crystal.name });
 
   const propertyRows = [
-    { label: "Energy", value: crystal.properties.energy },
-    { label: "Chakra", value: crystal.properties.chakra },
-    { label: "Zodiac", value: crystal.properties.zodiac },
-    { label: "Element", value: crystal.properties.element },
-    { label: "Ideal For", value: crystal.properties.idealFor },
-    { label: "Origin", value: crystal.properties.origin },
+    { label: t("energy"), value: crystal.properties.energy },
+    { label: t("chakra"), value: crystal.properties.chakra },
+    { label: t("zodiac"), value: crystal.properties.zodiac },
+    { label: t("element"), value: crystal.properties.element },
+    { label: t("idealFor"), value: crystal.properties.idealFor },
+    { label: t("origin"), value: crystal.properties.origin },
   ];
 
   const paragraphs = crystal.description.split("\n\n").map((p) => p.trim()).filter(Boolean);
@@ -89,9 +91,9 @@ export default async function CrystalDetailPage({
       <div className="bg-brown border-b border-white/10">
         <div className="container-luxury py-3">
           <nav className="flex items-center gap-1.5 font-sans text-xs text-ivory/40" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-gold transition-colors duration-200">Home</Link>
+            <Link href="/" className="hover:text-gold transition-colors duration-200">{t("breadcrumbHome")}</Link>
             <span>/</span>
-            <Link href="/crystal-guide" className="hover:text-gold transition-colors duration-200">Crystal Guide</Link>
+            <Link href="/crystal-guide" className="hover:text-gold transition-colors duration-200">{t("breadcrumbGuide")}</Link>
             <span>/</span>
             <span className="text-ivory/70">{crystal.name}</span>
           </nav>
@@ -111,7 +113,7 @@ export default async function CrystalDetailPage({
             <ScrollReveal direction="right" className="flex flex-col gap-6">
               <div className="flex items-center gap-3">
                 <span className="w-3 h-3 rounded-full flex-shrink-0 ring-2 ring-white/20" style={{ backgroundColor: crystal.color }} aria-hidden="true" />
-                <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-gold/70">Crystal Guide</p>
+                <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-gold/70">{t("breadcrumbGuide")}</p>
               </div>
               <div>
                 <h1 className="font-serif font-light text-ivory leading-tight mb-2" style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)" }}>{crystal.name}</h1>
@@ -128,7 +130,7 @@ export default async function CrystalDetailPage({
                 className="inline-flex items-center gap-2.5 bg-whatsapp text-white font-sans font-semibold text-sm py-3.5 px-6 rounded-xl shadow-whatsapp hover:opacity-90 active:scale-95 transition-all duration-200 self-start"
               >
                 <WhatsAppIcon className="w-4 h-4 flex-shrink-0" />
-                Shop {crystal.name} Jewelry
+                {t("shopJewelryWa", { crystal: crystal.name })}
               </a>
             </ScrollReveal>
           </div>
@@ -138,7 +140,7 @@ export default async function CrystalDetailPage({
       <section className="bg-ivory-dark border-b border-brown/10">
         <div className="container-luxury py-10 md:py-14">
           <ScrollReveal>
-            <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-brown/35 mb-6 text-center">Stone Properties</p>
+            <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-brown/35 mb-6 text-center">{t("stoneProperties")}</p>
           </ScrollReveal>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <StaggerReveal stagger={60}>
@@ -157,7 +159,7 @@ export default async function CrystalDetailPage({
         <div className="container-luxury">
           <div className="max-w-2xl mx-auto">
             <ScrollReveal>
-              <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-sage mb-6">About {crystal.name}</p>
+              <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-sage mb-6">{t("aboutStone", { crystal: crystal.name })}</p>
             </ScrollReveal>
             <div className="space-y-5">
               {paragraphs.map((para, i) => (
@@ -175,7 +177,7 @@ export default async function CrystalDetailPage({
           <div className="max-w-2xl mx-auto">
             <ScrollReveal>
               <h2 className="font-serif font-light text-brown mb-8" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}>
-                What {crystal.name} Is Known For
+                {t("knownFor", { crystal: crystal.name })}
               </h2>
             </ScrollReveal>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -196,7 +198,9 @@ export default async function CrystalDetailPage({
         <section className="bg-brown section-padding-sm">
           <div className="container-luxury">
             <ScrollReveal>
-              <h2 className="font-serif font-light text-ivory text-center mb-10" style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.9rem)" }}>Pairs Beautifully With</h2>
+              <h2 className="font-serif font-light text-ivory text-center mb-10" style={{ fontSize: "clamp(1.4rem, 2.5vw, 1.9rem)" }}>
+                {t("pairsWith")}
+              </h2>
             </ScrollReveal>
             <div className="flex flex-wrap justify-center gap-4">
               <StaggerReveal stagger={80} direction="none">
@@ -207,7 +211,7 @@ export default async function CrystalDetailPage({
                     </div>
                     <div>
                       <p className="font-sans text-xs font-medium text-ivory leading-tight">{paired.name}</p>
-                      <p className="font-sans text-[10px] text-ivory/40 mt-0.5">{paired.properties.chakra} Chakra</p>
+                      <p className="font-sans text-[10px] text-ivory/40 mt-0.5">{paired.properties.chakra} {t("chakraLabel")}</p>
                     </div>
                     <span className="text-ivory/20 group-hover:text-gold/60 text-xs transition-colors duration-200 ml-1">&rarr;</span>
                   </Link>
@@ -223,13 +227,17 @@ export default async function CrystalDetailPage({
           <div className="container-luxury">
             <ScrollReveal>
               <div className="text-center mb-10 md:mb-12">
-                <h2 className="font-serif font-light text-brown" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>{crystal.name} Jewelry</h2>
+                <h2 className="font-serif font-light text-brown" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>
+                  {t("shopJewelry", { crystal: crystal.name })}
+                </h2>
               </div>
             </ScrollReveal>
             <ProductGrid products={stoneProducts} cols={stoneProducts.length > 2 ? 3 : 2} />
             <ScrollReveal>
               <div className="text-center mt-10">
-                <Link href="/shop" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200 tracking-wide">View all products &rarr;</Link>
+                <Link href="/shop" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200 tracking-wide">
+                  {t("viewAllProducts")} &rarr;
+                </Link>
               </div>
             </ScrollReveal>
           </div>
@@ -239,7 +247,7 @@ export default async function CrystalDetailPage({
       <section className="bg-ivory-dark border-t border-brown/10 py-8">
         <div className="container-luxury text-center">
           <Link href="/crystal-guide" className="font-sans text-xs text-brown/35 hover:text-sage transition-colors duration-200 tracking-wide">
-            &larr; Back to Crystal Guide
+            &larr; {t("backToGuide")}
           </Link>
         </div>
       </section>

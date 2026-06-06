@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 interface ComingSoonProps {
   categoryLabel: string;
@@ -18,13 +19,20 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export default function ComingSoon({ categoryLabel, tagline }: ComingSoonProps) {
+  const t = useTranslations("comingSoon");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const waMessage = `Hello! I'm interested in ${categoryLabel} from Aura Stor. Can you let me know when they'll be available?`;
+  const waMessage = t("waMessage", { category: categoryLabel });
+
+  const ASSURANCES = [
+    t("assurance1"),
+    t("assurance2"),
+    t("assurance3"),
+    t("assurance4"),
+  ];
 
   return (
-    /* Full-page treatment — handles its own spacing to clear banner + header */
     <div className="bg-ivory min-h-screen pt-[120px] lg:pt-[100px]">
 
       {/* Hero section */}
@@ -40,7 +48,7 @@ export default function ComingSoon({ categoryLabel, tagline }: ComingSoonProps) 
 
           {/* Label */}
           <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-sage mb-4">
-            Coming Soon
+            {t("label")}
           </p>
 
           {/* Title */}
@@ -60,13 +68,10 @@ export default function ComingSoon({ categoryLabel, tagline }: ComingSoonProps) 
 
           {/* Body copy */}
           <p className="font-sans text-sm text-brown/60 leading-relaxed mb-4 max-w-lg mx-auto">
-            This collection is being thoughtfully curated. Each piece will be handcrafted
-            with intention, sourced from natural gemstones, and packaged in our signature
-            velvet gift pouches.
+            {t("bodyCopy")}
           </p>
           <p className="font-sans text-sm text-brown/50 leading-relaxed mb-10 max-w-md mx-auto">
-            Some things are worth waiting for. In the meantime, our team is available
-            via WhatsApp to discuss special requests or early access.
+            {t("bodyCopy2")}
           </p>
 
           {/* WhatsApp CTA */}
@@ -77,11 +82,11 @@ export default function ComingSoon({ categoryLabel, tagline }: ComingSoonProps) 
             className="inline-flex items-center gap-2.5 bg-whatsapp text-white font-sans font-semibold text-sm py-4 px-8 rounded-xl shadow-whatsapp hover:opacity-90 active:scale-95 transition-all duration-200"
           >
             <WhatsAppIcon className="w-4 h-4 flex-shrink-0" />
-            Enquire via WhatsApp
+            {t("enquireWhatsApp")}
           </a>
 
           <p className="font-sans text-xs text-brown/35 mt-3">
-            We reply within a few hours &bull; Mon &ndash; Sun, 9 AM &ndash; 10 PM
+            {t("replyTime")} &bull; {t("businessHours")}
           </p>
         </div>
       </div>
@@ -91,23 +96,22 @@ export default function ComingSoon({ categoryLabel, tagline }: ComingSoonProps) 
         <div className="container-luxury max-w-md mx-auto text-center">
 
           <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-brown/35 mb-6">
-            Stay in the loop
+            {t("stayInLoop")}
           </p>
 
           <h2 className="font-serif font-light text-brown mb-2"
             style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}>
-            Be the First to Know
+            {t("beFirstTitle")}
           </h2>
           <p className="font-sans text-xs text-brown/50 leading-relaxed mb-8">
-            Leave your email and we will notify you the moment this collection
-            launches. No spam — just the launch announcement and nothing else.
+            {t("beFirstBody")}
           </p>
 
           {submitted ? (
             <div className="flex items-center justify-center gap-3 py-4 bg-sage/8 rounded-xl border border-sage/20">
               <span className="text-sage text-lg leading-none">✓</span>
               <p className="font-sans text-sm text-sage font-medium">
-                You are on the list. We will be in touch.
+                {t("onTheList")}
               </p>
             </div>
           ) : (
@@ -130,7 +134,7 @@ export default function ComingSoon({ categoryLabel, tagline }: ComingSoonProps) 
                 type="submit"
                 className="bg-brown text-ivory font-sans text-sm font-medium px-6 py-3 rounded-xl hover:bg-sage transition-colors duration-300 whitespace-nowrap"
               >
-                Notify Me
+                {t("notifyMe")}
               </button>
             </form>
           )}
@@ -141,12 +145,7 @@ export default function ComingSoon({ categoryLabel, tagline }: ComingSoonProps) 
       <div className="bg-ivory border-t border-brown/10 py-10">
         <div className="container-luxury text-center">
           <div className="flex flex-wrap items-center justify-center gap-6 mb-8">
-            {[
-              "100% Natural Gemstones",
-              "Velvet Gift Packaging",
-              "WhatsApp Support",
-              "Shipped Across the Gulf",
-            ].map((item) => (
+            {ASSURANCES.map((item) => (
               <div key={item} className="flex items-center gap-2">
                 <span className="text-gold text-xs">✦</span>
                 <span className="font-sans text-xs text-brown/50 tracking-wide">{item}</span>
@@ -157,7 +156,7 @@ export default function ComingSoon({ categoryLabel, tagline }: ComingSoonProps) 
             href="/shop"
             className="font-sans text-xs text-brown/35 hover:text-sage transition-colors duration-200 tracking-wide"
           >
-            &larr; Browse all available products
+            &larr; {t("browseProducts")}
           </Link>
         </div>
       </div>

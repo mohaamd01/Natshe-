@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -15,42 +16,41 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 const GIFT_PREVIEWS = [
-  { src: "/images/products/set-tigers-eye-diamond-2.jpg", label: "Tiger's Eye Collection" },
-  { src: "/images/products/set-howlite-teardrop-2.jpg", label: "Howlite Calm Set" },
-  { src: "/images/products/set-aventurine-heart-2.jpg", label: "Aventurine Heart Set" },
-];
-
-const GIFT_FEATURES = [
-  "Signature Aura Stor velvet gift pouch",
-  "Handwritten intention card (on request)",
-  "Crystal meaning & care guide insert",
-  "Beautiful branded outer packaging",
+  { src: "/images/products/set-tigers-eye-diamond-2.jpg" },
+  { src: "/images/products/set-howlite-teardrop-2.jpg" },
+  { src: "/images/products/set-aventurine-heart-2.jpg" },
 ];
 
 export default function GiftSetsComingSoon() {
+  const t = useTranslations("giftSets");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const customGiftWa = buildWhatsAppUrl(
-    "Hello! I'm interested in ordering a custom gift set from Aura Stor. Can you help me put together the perfect crystal gift?"
-  );
+  const customGiftWa = buildWhatsAppUrl(t("waMessage"));
+
+  const GIFT_FEATURES = [
+    t("feature1"),
+    t("feature2"),
+    t("feature3"),
+    t("feature4"),
+  ];
 
   return (
     <div className="bg-ivory pt-[120px] lg:pt-[100px]">
       <section className="bg-brown section-padding">
         <div className="container-luxury text-center">
           <ScrollReveal>
-            <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-gold/70 mb-4">Coming Soon</p>
+            <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-gold/70 mb-4">{t("pageLabel")}</p>
             <h1 className="font-serif font-light text-ivory mb-4" style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)" }}>
-              Gift Sets
+              {t("pageTitle")}
             </h1>
             <p className="font-serif italic text-ivory/55 text-xl font-light mb-8 max-w-md mx-auto">
-              The most meaningful gifts are the ones that say something.
+              {t("tagline")}
             </p>
             <div className="inline-block bg-white/5 border border-white/15 rounded-2xl px-7 py-6 text-center">
-              <p className="font-sans text-xs text-gold/70 tracking-[0.2em] uppercase mb-3">Available now</p>
+              <p className="font-sans text-xs text-gold/70 tracking-[0.2em] uppercase mb-3">{t("availableNow")}</p>
               <p className="font-serif font-light text-ivory mb-2" style={{ fontSize: "clamp(1rem, 2vw, 1.3rem)" }}>
-                Custom Gift Requests via WhatsApp
+                {t("customGiftTitle")}
               </p>
               <a
                 href={customGiftWa}
@@ -59,7 +59,7 @@ export default function GiftSetsComingSoon() {
                 className="inline-flex items-center gap-2.5 bg-whatsapp text-white font-sans font-semibold text-sm py-3.5 px-7 rounded-xl shadow-whatsapp hover:opacity-90 active:scale-95 transition-all duration-200"
               >
                 <WhatsAppIcon className="w-4 h-4 flex-shrink-0" />
-                Request a Custom Gift
+                {t("requestCustomGift")}
               </a>
             </div>
           </ScrollReveal>
@@ -70,13 +70,10 @@ export default function GiftSetsComingSoon() {
         <div className="container-luxury">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {GIFT_PREVIEWS.map((p) => (
-              <ScrollReveal key={p.label}>
+              <ScrollReveal key={p.src}>
                 <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/5" }}>
-                  <Image src={p.src} alt={p.label} fill className="object-cover object-center opacity-85" sizes="(max-width: 640px) 100vw, 33vw" />
+                  <Image src={p.src} alt="" fill className="object-cover object-center opacity-85" sizes="(max-width: 640px) 100vw, 33vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-brown/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <p className="font-serif font-light text-ivory text-sm">{p.label}</p>
-                  </div>
                 </div>
               </ScrollReveal>
             ))}
@@ -88,7 +85,7 @@ export default function GiftSetsComingSoon() {
         <div className="container-luxury max-w-md mx-auto text-center">
           <ScrollReveal>
             <h2 className="font-serif font-light text-brown mb-6" style={{ fontSize: "clamp(1.2rem, 2vw, 1.5rem)" }}>
-              Every Gift Set Will Include
+              {t("everyGiftIncludes")}
             </h2>
             <div className="space-y-3 text-left">
               {GIFT_FEATURES.map((f) => (
@@ -106,12 +103,12 @@ export default function GiftSetsComingSoon() {
         <div className="container-luxury max-w-md mx-auto text-center">
           <ScrollReveal>
             <h2 className="font-serif font-light text-brown mb-2" style={{ fontSize: "clamp(1.2rem, 2vw, 1.5rem)" }}>
-              Be the First to Know
+              {t("beFirstToKnow")}
             </h2>
             {submitted ? (
               <div className="flex items-center justify-center gap-2 py-3 bg-sage/8 rounded-xl border border-sage/20">
                 <span className="text-sage">✓</span>
-                <p className="font-sans text-sm text-sage font-medium">You are on the list. We will be in touch.</p>
+                <p className="font-sans text-sm text-sage font-medium">{t("onTheList")}</p>
               </div>
             ) : (
               <form onSubmit={(e) => { e.preventDefault(); if (email.trim()) setSubmitted(true); }} className="flex flex-col sm:flex-row gap-2.5">
@@ -124,7 +121,7 @@ export default function GiftSetsComingSoon() {
                   className="flex-1 bg-ivory border border-brown/20 rounded-xl px-4 py-3 font-sans text-sm text-brown placeholder:text-brown/30 focus:outline-none focus:border-sage transition-colors duration-200"
                 />
                 <button type="submit" className="bg-brown text-ivory font-sans text-sm font-medium px-6 py-3 rounded-xl hover:bg-sage transition-colors duration-300 whitespace-nowrap">
-                  Notify Me
+                  {t("notifyMe")}
                 </button>
               </form>
             )}
@@ -134,11 +131,11 @@ export default function GiftSetsComingSoon() {
 
       <div className="bg-ivory-dark border-t border-brown/10 py-8">
         <div className="container-luxury flex flex-wrap items-center justify-center gap-4">
-          <Link href="/shop" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">&larr; All Products</Link>
+          <Link href="/shop" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">&larr; {t("allProducts")}</Link>
           <span className="text-brown/20">|</span>
-          <Link href="/collections" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">Browse Collections</Link>
+          <Link href="/collections" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">{t("browseCollections")}</Link>
           <span className="text-brown/20">|</span>
-          <Link href="/crystal-guide" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">Crystal Guide</Link>
+          <Link href="/crystal-guide" className="font-sans text-xs text-brown/40 hover:text-sage transition-colors duration-200">{t("crystalGuide")}</Link>
         </div>
       </div>
     </div>
